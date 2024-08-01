@@ -1,2 +1,3 @@
-# firebase-app
-Building an App to Learn Firebase and NoSQL
+# NoSQL App
+
+Building an App to Learn Firebase and NoSQL,
