@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", "sans-serif";
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 576px;
+  padding: 5px;
+}
+
+#cat-image {
+  margin: 0 auto;
+  width: 150px;
+}
+
+.days-card {
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid black;
+  margin: 10px 0;
+}
+
+select {
+  margin: 10px 0;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  font-family: "Rubik", "sans-serif";
+}
+
+#input-day,
+.exercise-input {
+  color: #432000;
+  background-color: #dce1eb;
+  border: 0;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  font-family: "Rubik", "sans-serif";
+  margin: 10px 0;
+}
+
+#submit-button {
+  color: #fdfdfd;
+  background-color: #ac485a;
+  border: 0;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: center;
+  font-family: "Rubik", "sans-serif";
+}
+
+#exercise-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-input {
+  width: 100%;
+  box-sizing: border-box; /* Inclui padding e borda na largura total */
+}

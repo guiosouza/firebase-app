@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <img id="cat-image" src="assets/cat-training.jpg" alt="" />
+      <div class="days-card">
+        <p>Dia 1: Ombro, costas e bíceps</p>
+        <p>Dia 2: Peito, perna e tríceps</p>
+        <p>Dia extra: Corrida</p>
+      </div>
+      <select id="day-select">
+        <option value="0" selected>Selecione um dia</option>
+        <option value="1">Dia 1</option>
+        <option value="2">Dia 2</option>
+        <option value="3">Dia extra</option>
+      </select>
+      <div id="exercise-inputs" style="display: none">
+        <input type="text" class="exercise-input" placeholder="" />
+        <input type="text" class="exercise-input" placeholder="" />
+        <input
+          type="text"
+          class="exercise-input"
+          placeholder=""
+          style="display: none"
+        />
+      </div>
+      <button id="submit-button" onclick="handleSubmit()">ENVIAR</button>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
