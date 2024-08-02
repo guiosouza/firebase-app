@@ -1,37 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My App</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Carrossel de Cartões</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/carousel.css" />
   </head>
   <body>
-    <div class="container">
-      <img id="cat-image" src="assets/cat-training.jpg" alt="" />
-      <div class="days-card">
-        <p>Dia 1: Ombro, costas e bíceps</p>
-        <p>Dia 2: Peito, perna e tríceps</p>
-        <p>Dia extra: Corrida</p>
-      </div>
-      <select id="day-select">
-        <option value="0" selected>Selecione um dia</option>
-        <option value="1">Dia 1</option>
-        <option value="2">Dia 2</option>
-        <option value="3">Dia extra</option>
-      </select>
-      <div id="exercise-inputs" style="display: none">
-        <input type="text" class="exercise-input" placeholder="" />
-        <input type="text" class="exercise-input" placeholder="" />
-        <input
-          type="text"
-          class="exercise-input"
-          placeholder=""
-          style="display: none"
-        />
-      </div>
-      <button id="submit-button" onclick="handleSubmit()">ENVIAR</button>
+    <div class="page-container">
+      <header>
+        <div class="carousel-container">
+          <div class="carousel" id="carousel">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 1" />
+              <h2>Card 1</h2>
+              <p>Conteúdo do card 1</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 2" />
+              <h2>Card 2</h2>
+              <p>Conteúdo do card 2</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 3" />
+              <h2>Card 3</h2>
+              <p>Conteúdo do card 3</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 4" />
+              <h2>Card 4</h2>
+              <p>Conteúdo do card 4</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 5" />
+              <h2>Card 5</h2>
+              <p>Conteúdo do card 5</p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main></main>
     </div>
-    <script src="index.js"></script>
+
+    <script src="/js/carousel.js"></script>
   </body>
 </html>
