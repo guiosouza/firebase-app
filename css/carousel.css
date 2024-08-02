@@ -1,6 +1,7 @@
 .carousel-container {
   overflow: hidden;
 }
+
 .carousel {
   display: flex;
   touch-action: pan-y;
@@ -8,13 +9,15 @@
   cursor: grab;
   transition: transform 0.1s ease-out;
 }
+
 .carousel.grabbing {
   cursor: grabbing;
   transition: none;
 }
+
 .card {
-  min-width: 180px;
-  margin-right: 10px;
+  min-width: 170px;
+  margin-right: 24px;
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
@@ -22,6 +25,7 @@
   text-align: center;
   flex-shrink: 0;
 }
+
 .card img {
   max-width: 100%;
   border-radius: 10px;
