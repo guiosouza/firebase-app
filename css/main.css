@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #eeeeee;
-  padding: 5px;
+  box-sizing: border-box;
 }
 
 .page-container {
   max-width: 576px;
+  margin: 0 auto; /* Centralizar */
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .day-options-container {
@@ -17,9 +22,15 @@ body {
   font-size: 16px;
   padding: 16px;
   border-radius: 4px;
-  appearance: none;
   width: 100%;
-  border: 1px solid #d9d9d9;
+  border: 1px solid #494949;
+  appearance: none; /* Remove a setinha padrão */
+  -webkit-appearance: none; /* Remove a setinha padrão no Safari */
+  -moz-appearance: none; /* Remove a setinha padrão no Firefox */
+  background: url("../assets/images/ep_arrow-down.png") no-repeat right 10px
+    center;
+  background-color: white; /* Cor de fundo */
+  background-size: 16px; /* Ajusta o tamanho da imagem */
 }
 
 .dropdown-options option {
@@ -29,7 +40,45 @@ body {
   appearance: none;
   width: 100%;
   border: 1px solid #d9d9d9;
+  box-sizing: border-box;
+}
+
+#inputs-container {
+  margin-top: 32px;
+  max-width: 576px;
+  overflow: hidden;
 }
 
 .input-group {
+  font-size: 16px;
+  width: 100%;
+  margin-top: 16px;
+  box-sizing: border-box;
+}
+
+.input-group label {
+  font-weight: 700;
+}
+
+.input-group input {
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 4px;
+  border: 1px solid gray;
+}
+
+.custom-select {
+  position: relative;
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid #494949;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.selected-option {
+  padding: 16px;
+  cursor: pointer;
 }
