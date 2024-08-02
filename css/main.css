@@ -24,13 +24,13 @@ body {
   border-radius: 4px;
   width: 100%;
   border: 1px solid #494949;
-  appearance: none; /* Remove a setinha padrão */
-  -webkit-appearance: none; /* Remove a setinha padrão no Safari */
-  -moz-appearance: none; /* Remove a setinha padrão no Firefox */
-  background: url("../assets/images/ep_arrow-down.png") no-repeat right 10px
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("../assets/images/ep_arrow-down.png") no-repeat right 12px
     center;
-  background-color: white; /* Cor de fundo */
-  background-size: 16px; /* Ajusta o tamanho da imagem */
+  background-color: white;
+  background-size: 18px;
 }
 
 .dropdown-options option {
@@ -81,4 +81,24 @@ body {
 .selected-option {
   padding: 16px;
   cursor: pointer;
+}
+
+#submit-button {
+  padding: 14px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: #00a832;
+  color: white;
+}
+
+#submit-button:active {
+  padding: 14px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: #00571a;
+  color: white;
 }
