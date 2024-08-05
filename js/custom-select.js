@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
       optionItem.classList.add("option-item");
       optionItem.textContent = option.textContent;
       optionItem.dataset.value = option.value;
+
+      // Adiciona o ID dinâmico com base no índice
+      optionItem.id = `day${index}`;
+
       optionList.appendChild(optionItem);
 
       // Adiciona evento de clique para alterar a seleção

@@ -91,6 +91,7 @@ body {
   border: none;
   background-color: #00a832;
   color: white;
+  margin-top: 32px;
 }
 
 #submit-button:active {
@@ -101,4 +102,7 @@ body {
   border: none;
   background-color: #00571a;
   color: white;
+}
+
+#info {
 }

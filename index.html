@@ -31,19 +31,22 @@
           </div>
         </div>
       </header>
+      <div id="record-container"></div>
       <main>
-        <div class="day-options-container">
-          <select id="day-select" class="dropdown-options">
-            <option value="">Escolher</option>
-            <option value="1">Dia 1</option>
-            <option value="2">Dia 2</option>
-            <option value="3">Dia 3</option>
-          </select>
-        </div>
-        <div id="inputs-container"></div>
-        <div>
-          <button id="submit-button">ENVIAR</button>
-        </div>
+        <form action="" id="exercise-form">
+          <div class="day-options-container">
+            <select id="day-select" class="dropdown-options">
+              <option value="">Escolher</option>
+              <option value="1">Dia 1</option>
+              <option value="2">Dia 2</option>
+              <option value="3">Dia 3</option>
+            </select>
+          </div>
+          <div id="inputs-container"></div>
+          <div>
+            <button id="submit-button">ENVIAR</button>
+          </div>
+        </form>
       </main>
     </div>
 
@@ -51,5 +54,6 @@
     <script type="module" src="/js/main.js"></script>
     <script type="module" src="/js/functions.js"></script>
     <script type="module" src="/js/custom-select.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
   </body>
 </html>
