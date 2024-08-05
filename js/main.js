@@ -40,7 +40,10 @@ function saveMessages(data) {
     tutBiceps,
     runTime,
     runDistance,
+    timestamp,
   } = data;
+
+  console.log("timestamp", timestamp);
 
   if (dayNumber === 1) {
     let newExerciseFormDay = exerciseFormDB.push();
@@ -67,6 +70,7 @@ function saveMessages(data) {
       tutBiceps: null,
       runTime: null,
       runDistance: null,
+      timestamp: timestamp,
     });
   } else if (dayNumber === 2) {
     let newExerciseFormDay = exerciseFormDB.push();
@@ -93,6 +97,7 @@ function saveMessages(data) {
       tutBiceps: Number(tutBiceps) || null,
       runTime: null,
       runDistance: null,
+      timestamp: timestamp,
     });
   } else if (dayNumber === 3) {
     let newExerciseFormDay = exerciseFormDB.push();
@@ -119,6 +124,7 @@ function saveMessages(data) {
       tutBiceps: null,
       runTime: Number(runTime) || null,
       runDistance: Number(runDistance) || null,
+      timestamp: timestamp,
     });
   }
 }
@@ -179,6 +185,7 @@ function submitForm(event) {
       tutBiceps: null,
       runTime: null,
       runDistance: null,
+      timestamp: Date.now(),
     });
   } else if (selectedOption.innerHTML === "Dia 2") {
     dayNumber = getDayNumberFromId("day2");
@@ -214,6 +221,7 @@ function submitForm(event) {
       tutBiceps: Number(tutBiceps),
       runTime: null,
       runDistance: null,
+      timestamp: Date.now(),
     });
   } else if (selectedOption.innerHTML == "Dia 3") {
     dayNumber = getDayNumberFromId("day3");
@@ -243,6 +251,7 @@ function submitForm(event) {
       tutBiceps: null,
       runTime: Number(runTime),
       runDistance: Number(runDistance),
+      timestamp: Date.now(),
     });
   }
 }

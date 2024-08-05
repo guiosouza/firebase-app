@@ -91,7 +91,7 @@ function loadExercises() {
     }
 
     // Ordenar os exercícios em ordem decrescente
-    exercises.sort((a, b) => b.day - a.day);
+    exercises.sort((a, b) => b.timestamp - a.timestamp);
 
     // Renderizar os cards
     renderCards(exercises);
@@ -140,7 +140,7 @@ function renderCards(exercises) {
     };
 
     for (let key in exercise) {
-      if (key !== "id" && key !== "day") {
+      if (key !== "id" && key !== "day" && key !== "timestamp") {
         let p = document.createElement("p");
         p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
 
