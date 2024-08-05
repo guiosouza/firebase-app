@@ -1,0 +1,33 @@
+.carousel-container {
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  touch-action: pan-x;
+  user-select: none;
+  cursor: grab;
+  transition: transform 0.1s ease-out;
+}
+
+.carousel.grabbing {
+  cursor: grabbing;
+  transition: none;
+}
+
+.card {
+  margin-bottom: 18px; /* Espaço entre os cartões */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex-shrink: 0;
+  border: 1px solid #494949;
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 10px;
+}

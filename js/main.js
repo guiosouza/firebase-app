@@ -15,14 +15,112 @@ let inputFieldEl = document.getElementById("series-chest");
 
 document.getElementById("exercise-form").addEventListener("submit", submitForm);
 
-function saveMessages(seriesChest, dayNumber, repsChest) {
-  var newExerciseForm = exerciseFormDB.push();
+function saveMessages(data) {
+  // Desestruturar os dados recebidos
+  const {
+    seriesChest,
+    dayNumber,
+    repsChest,
+    tutChest,
+    seriesLeg,
+    repsLeg,
+    weightLeg,
+    tutLegs,
+    seriesTriceps,
+    repsTriceps,
+    weightTriceps,
+    tutTriceps,
+    seriesShoulders,
+    repsShoulders,
+    weightShoulders,
+    tutShoulders,
+    seriesBiceps,
+    repsBiceps,
+    weightBiceps,
+    tutBiceps,
+    runTime,
+    runDistance,
+  } = data;
 
-  newExerciseForm.set({
-    seriesChest: Number(seriesChest),
-    day: Number(dayNumber),
-    repsChest: Number(repsChest),
-  });
+  if (dayNumber === 1) {
+    let newExerciseFormDay = exerciseFormDB.push();
+    newExerciseFormDay.set({
+      seriesChest: Number(seriesChest) || null,
+      day: Number(dayNumber),
+      repsChest: Number(repsChest) || null,
+      tutChest: Number(tutChest) || null,
+      seriesLeg: Number(seriesLeg) || null,
+      repsLeg: Number(repsLeg) || null,
+      weightLeg: Number(weightLeg) || null,
+      tutLegs: Number(tutLegs) || null,
+      seriesTriceps: Number(seriesTriceps) || null,
+      repsTriceps: Number(repsTriceps) || null,
+      weightTriceps: Number(weightTriceps) || null,
+      tutTriceps: Number(tutTriceps) || null,
+      seriesShoulders: null,
+      repsShoulders: null,
+      weightShoulders: null,
+      tutShoulders: null,
+      seriesBiceps: null,
+      repsBiceps: null,
+      weightBiceps: null,
+      tutBiceps: null,
+      runTime: null,
+      runDistance: null,
+    });
+  } else if (dayNumber === 2) {
+    let newExerciseFormDay = exerciseFormDB.push();
+    newExerciseFormDay.set({
+      seriesChest: null,
+      day: Number(dayNumber),
+      repsChest: null,
+      tutChest: null,
+      seriesLeg: null,
+      repsLeg: null,
+      weightLeg: null,
+      tutLegs: null,
+      seriesTriceps: null,
+      repsTriceps: null,
+      weightTriceps: null,
+      tutTriceps: null,
+      seriesShoulders: Number(seriesShoulders) || null,
+      repsShoulders: Number(repsShoulders) || null,
+      weightShoulders: Number(weightShoulders) || null,
+      tutShoulders: Number(tutShoulders) || null,
+      seriesBiceps: Number(seriesBiceps) || null,
+      repsBiceps: Number(repsBiceps) || null,
+      weightBiceps: Number(weightBiceps) || null,
+      tutBiceps: Number(tutBiceps) || null,
+      runTime: null,
+      runDistance: null,
+    });
+  } else if (dayNumber === 3) {
+    let newExerciseFormDay = exerciseFormDB.push();
+    newExerciseFormDay.set({
+      seriesChest: null,
+      day: Number(dayNumber),
+      repsChest: null,
+      tutChest: null,
+      seriesLeg: null,
+      repsLeg: null,
+      weightLeg: null,
+      tutLegs: null,
+      seriesTriceps: null,
+      repsTriceps: null,
+      weightTriceps: null,
+      tutTriceps: null,
+      seriesShoulders: null,
+      repsShoulders: null,
+      weightShoulders: null,
+      tutShoulders: null,
+      seriesBiceps: null,
+      repsBiceps: null,
+      weightBiceps: null,
+      tutBiceps: null,
+      runTime: Number(runTime) || null,
+      runDistance: Number(runDistance) || null,
+    });
+  }
 }
 
 function getElementVal(id) {
@@ -41,16 +139,110 @@ function elementExists(id) {
 function submitForm(event) {
   event.preventDefault();
 
-  var dayNumber;
+  let dayNumber;
 
-  if (elementExists("day1")) {
+  let selectedOption = document.querySelector(".selected-option");
+
+  if (selectedOption.innerHTML === "Dia 1") {
     dayNumber = getDayNumberFromId("day1");
-    var seriesChest = getElementVal("series-chest");
-    var repsChest = getElementVal("reps-chest");
-    saveMessages(seriesChest, dayNumber, repsChest);
-  } else if (elementExists("day2")) {
+    let seriesChest = getElementVal("series-chest");
+    let repsChest = getElementVal("reps-chest");
+    let tutChest = getElementVal("tut-chest");
+    let seriesLeg = getElementVal("series-legs");
+    let repsLeg = getElementVal("reps-legs");
+    let weightLeg = getElementVal("weight-legs");
+    let tutLegs = getElementVal("tut-legs");
+    let seriesTriceps = getElementVal("series-triceps");
+    let repsTriceps = getElementVal("reps-triceps");
+    let weightTriceps = getElementVal("weight-triceps");
+    let tutTriceps = getElementVal("tut-triceps");
+    saveMessages({
+      seriesChest: seriesChest,
+      dayNumber: Number(dayNumber),
+      repsChest: Number(repsChest),
+      tutChest: Number(tutChest),
+      seriesLeg: Number(seriesLeg),
+      repsLeg: Number(repsLeg),
+      weightLeg: Number(weightLeg),
+      tutLegs: Number(tutLegs),
+      seriesTriceps: Number(seriesTriceps),
+      repsTriceps: Number(repsTriceps),
+      weightTriceps: Number(weightTriceps),
+      tutTriceps: Number(tutTriceps),
+      seriesShoulders: null,
+      repsShoulders: null,
+      weightShoulders: null,
+      tutShoulders: null,
+      seriesBiceps: null,
+      repsBiceps: null,
+      weightBiceps: null,
+      tutBiceps: null,
+      runTime: null,
+      runDistance: null,
+    });
+  } else if (selectedOption.innerHTML === "Dia 2") {
     dayNumber = getDayNumberFromId("day2");
-  } else if (elementExists("day3")) {
+    let seriesShoulders = getElementVal("series-shoulders");
+    let repsShoulders = getElementVal("reps-shoulders");
+    let weightShoulders = getElementVal("weight-shoulders");
+    let tutShoulders = getElementVal("tut-shoulders");
+    let seriesBiceps = getElementVal("series-biceps");
+    let repsBiceps = getElementVal("reps-biceps");
+    let weightBiceps = getElementVal("weight-biceps");
+    let tutBiceps = getElementVal("tut-biceps");
+    console.log(dayNumber);
+    saveMessages({
+      seriesChest: null,
+      dayNumber: Number(dayNumber),
+      repsChest: null,
+      tutChest: null,
+      seriesLeg: null,
+      repsLeg: null,
+      weightLeg: null,
+      tutLegs: null,
+      seriesTriceps: null,
+      repsTriceps: null,
+      weightTriceps: null,
+      tutTriceps: null,
+      seriesShoulders: Number(seriesShoulders),
+      repsShoulders: Number(repsShoulders),
+      weightShoulders: Number(weightShoulders),
+      tutShoulders: Number(tutShoulders),
+      seriesBiceps: Number(seriesBiceps),
+      repsBiceps: Number(repsBiceps),
+      weightBiceps: Number(weightBiceps),
+      tutBiceps: Number(tutBiceps),
+      runTime: null,
+      runDistance: null,
+    });
+  } else if (selectedOption.innerHTML == "Dia 3") {
     dayNumber = getDayNumberFromId("day3");
+    let runTime = getElementVal("run-time");
+    let runDistance = getElementVal("run-distance");
+    console.log(dayNumber);
+    saveMessages({
+      seriesChest: null,
+      dayNumber: Number(dayNumber),
+      repsChest: null,
+      tutChest: null,
+      seriesLeg: null,
+      repsLeg: null,
+      weightLeg: null,
+      tutLegs: null,
+      seriesTriceps: null,
+      repsTriceps: null,
+      weightTriceps: null,
+      tutTriceps: null,
+      seriesShoulders: null,
+      repsShoulders: null,
+      weightShoulders: null,
+      tutShoulders: null,
+      seriesBiceps: null,
+      repsBiceps: null,
+      weightBiceps: null,
+      tutBiceps: null,
+      runTime: Number(runTime),
+      runDistance: Number(runDistance),
+    });
   }
 }

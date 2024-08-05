@@ -69,10 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="reps-chest" name="reps-chest" min="1" />
         </div>
         <div class="input-group">
-          <label for="weight-chest">Peso (kg):</label>
-          <input type="number" id="weight-chest" name="weight-chest" min="0" step="0.1" />
-        </div>
-        <div class="input-group">
           <label for="tut-chest">TUT Excêntrica (segundos):</label>
           <input type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
         </div>

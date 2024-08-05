@@ -91,7 +91,7 @@ body {
   border: none;
   background-color: #00a832;
   color: white;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 #submit-button:active {
@@ -104,5 +104,6 @@ body {
   color: white;
 }
 
-#info {
+.training-list {
+  margin: 24px 0 24px 0;
 }
