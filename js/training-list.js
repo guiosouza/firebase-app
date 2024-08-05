@@ -103,6 +103,66 @@ function renderCards(exercises) {
   const carousel = document.getElementById("carousel");
   carousel.innerHTML = ""; // Limpar o conteúdo existente
 
+  // Objeto de mapeamento para traduzir e formatar os campos
+  const fieldMap = {
+    repsChest: "Repetições de peito",
+    tutChest: "Tempo sob tensão (peito)",
+    repsLeg: "Repetições de perna",
+    repsTriceps: "Repetições de tríceps",
+    seriesChest: "Séries de peito",
+    seriesLeg: "Séries de perna",
+    seriesTriceps: "Séries de tríceps",
+    tutLegs: "Tempo sob tensão (pernas)",
+    tutTriceps: "Tempo sob tensão (tríceps)",
+    weightLeg: "Peso (perna)",
+    weightTriceps: "Peso (tríceps)",
+    runDistance: "Distância percorrida (KM)",
+    runTime: "Tempo de corrida",
+    seriesShoulders: "Séries de ombros",
+    repsShoulders: "Repetições de ombros",
+    weightShoulders: "Peso (ombros)",
+    tutShoulders: "Tempo sob tensão (ombros)",
+    seriesBiceps: "Séries de bíceps",
+    repsBiceps: "Repetições de bíceps",
+    weightBiceps: "Peso (bíceps)",
+    tutBiceps: "Tempo sob tensão (bíceps)",
+  };
+
+  // Função para agrupar exercícios por categoria
+  function groupByCategory(exercise) {
+    const categories = {
+      Peito: [],
+      Perna: [],
+      Tríceps: [],
+      Ombros: [],
+      Bíceps: [],
+      Corrida: [],
+    };
+
+    for (let key in exercise) {
+      if (key !== "id" && key !== "day") {
+        let p = document.createElement("p");
+        p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
+
+        if (key.includes("Chest")) {
+          categories.Peito.push(p);
+        } else if (key.includes("Leg")) {
+          categories.Perna.push(p);
+        } else if (key.includes("Triceps")) {
+          categories.Tríceps.push(p);
+        } else if (key.includes("Shoulders")) {
+          categories.Ombros.push(p);
+        } else if (key.includes("Biceps")) {
+          categories.Bíceps.push(p);
+        } else if (key.includes("run")) {
+          categories.Corrida.push(p);
+        }
+      }
+    }
+
+    return categories;
+  }
+
   exercises.forEach((exercise) => {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -117,43 +177,15 @@ function renderCards(exercises) {
     card.appendChild(img);
     card.appendChild(title);
 
-    // Adicionar os detalhes dos exercícios
-    for (let key in exercise) {
-      if (key !== "id" && key !== "day") {
-        const p = document.createElement("p");
+    const categories = groupByCategory(exercise);
 
-        // Traduzir e formatar os campos específicos
-        if (key == "repsChest") {
-          p.textContent = `Repetições de peito: ${exercise[key]}`;
-        } else if (key == "repsLeg") {
-          p.textContent = `Repetições de perna: ${exercise[key]}`;
-        } else if (key == "repsTriceps") {
-          p.textContent = `Repetições de tríceps: ${exercise[key]}`;
-        } else if (key == "seriesChest") {
-          p.textContent = `Séries de peito: ${exercise[key]}`;
-        } else if (key == "seriesLeg") {
-          p.textContent = `Séries de perna: ${exercise[key]}`;
-        } else if (key == "seriesTriceps") {
-          p.textContent = `Séries de tríceps: ${exercise[key]}`;
-        } else if (key == "tutChest") {
-          p.textContent = `Tempo sob tensão (peito): ${exercise[key]} segundos`;
-        } else if (key == "tutLegs") {
-          p.textContent = `Tempo sob tensão (pernas): ${exercise[key]} segundos`;
-        } else if (key == "tutTriceps") {
-          p.textContent = `Tempo sob tensão (tríceps): ${exercise[key]} segundos`;
-        } else if (key == "weightLeg") {
-          p.textContent = `Peso (perna): ${exercise[key]} kg`;
-        } else if (key == "weightTriceps") {
-          p.textContent = `Peso (tríceps): ${exercise[key]} kg`;
-        } else if (key == "runDistance") {
-          p.textContent = `Distância percorrida (KM): ${exercise[key]}`;
-        } else if (key == "runTime") {
-          p.textContent = `Tempo de corrida: ${exercise[key]}`;
-        } else {
-          p.textContent = `${key}: ${exercise[key]}`;
-        }
-
-        card.appendChild(p);
+    // Adicionar os detalhes dos exercícios agrupados por categoria
+    for (let category in categories) {
+      if (categories[category].length > 0) {
+        const categoryTitle = document.createElement("h3");
+        categoryTitle.textContent = category;
+        card.appendChild(categoryTitle);
+        categories[category].forEach((p) => card.appendChild(p));
       }
     }
 
