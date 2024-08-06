@@ -7,7 +7,7 @@
 }
 
 .items-listing {
-  margin: 4px;
+  margin: 4px 4px 4px 0px;
 }
 
 .carousel {
@@ -44,5 +44,5 @@
 }
 
 .category h3 {
-  margin: 8px;
+  margin: 8px 8px 8px 0px;
 }
