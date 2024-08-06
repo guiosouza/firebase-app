@@ -3,57 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrossel de Cartões</title>
+    <title>Formulário de treino</title>
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/carousel.css" />
     <link rel="stylesheet" href="./css/custom-select.css" />
   </head>
   <body>
     <div class="page-container">
-      <header>
-        <div class="carousel-container">
-          <div class="carousel" id="carousel">
-            <div class="card">
-              <img src="https://via.placeholder.com/150" alt="Card 1" />
-              <h2>Dia 1</h2>
-              <p>Peito, perna e tríceps</p>
-            </div>
-            <div class="card">
-              <img src="https://via.placeholder.com/150" alt="Card 2" />
-              <h2>Dia 2</h2>
-              <p>Ombro e bíceps</p>
-            </div>
-            <div class="card">
-              <img src="https://via.placeholder.com/150" alt="Card 3" />
-              <h2>Dia 3</h2>
-              <p>Corrida ou aeróbico</p>
-            </div>
-          </div>
+      <section id="view-logged-out">
+        <div>
+          <button id="continue-with-google">LOGAR COM GOOGLE</button>
         </div>
-      </header>
-      <div id="record-container"></div>
-      <main>
-        <div class="training-list">
-          <h4>
-            Veja os últimos treinos
-            <a href="./training-listing.html" target="_blank">aqui</a>
-          </h4>
-        </div>
-        <form action="" id="exercise-form">
-          <div class="day-options-container">
-            <select id="day-select" class="dropdown-options">
-              <option value="">Escolher</option>
-              <option value="1">Dia 1</option>
-              <option value="2">Dia 2</option>
-              <option value="3">Dia 3</option>
-            </select>
+      </section>
+      <section id="view-logged-in">
+        <header>
+          <div class="carousel-container">
+            <div class="carousel" id="carousel">
+              <div class="card">
+                <img src="https://via.placeholder.com/150" alt="Card 1" />
+                <h2>Dia 1</h2>
+                <p>Peito, perna e tríceps</p>
+              </div>
+              <div class="card">
+                <img src="https://via.placeholder.com/150" alt="Card 2" />
+                <h2>Dia 2</h2>
+                <p>Ombro e bíceps</p>
+              </div>
+              <div class="card">
+                <img src="https://via.placeholder.com/150" alt="Card 3" />
+                <h2>Dia 3</h2>
+                <p>Corrida ou aeróbico</p>
+              </div>
+            </div>
           </div>
-          <div id="inputs-container"></div>
-          <div>
-            <button id="submit-button">ENVIAR</button>
+        </header>
+        <div id="record-container"></div>
+        <main>
+          <div class="training-list">
+            <h4>
+              Veja os últimos treinos
+              <a href="./training-listing.html" target="_blank">aqui</a>
+            </h4>
           </div>
-        </form>
-      </main>
+          <form action="" id="exercise-form">
+            <div class="day-options-container">
+              <select id="day-select" class="dropdown-options">
+                <option value="">Escolher</option>
+                <option value="1">Dia 1</option>
+                <option value="2">Dia 2</option>
+                <option value="3">Dia 3</option>
+              </select>
+            </div>
+            <div id="inputs-container"></div>
+            <div>
+              <button id="submit-button">ENVIAR</button>
+            </div>
+          </form>
+        </main>
+      </section>
     </div>
 
     <script type="module" src="./js/carousel.js"></script>

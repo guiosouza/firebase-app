@@ -15,7 +15,35 @@ let inputFieldEl = document.getElementById("series-chest");
 
 document.getElementById("exercise-form").addEventListener("submit", submitForm);
 
+function convertTimestampToBRFormat(timestamp) {
+  // Converte o timestamp para um objeto Date
+  const date = new Date(timestamp);
+
+  // Extrai os componentes da data
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Os meses são indexados a partir de 0
+  const year = date.getFullYear();
+
+  // Extrai os componentes da hora
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+
+  // Formata a data no formato brasileiro
+  const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
+  return formattedDate;
+}
+
 function saveMessages(data) {
+  /*
+  CÁLCULO DE CARGA TOTAL 
+  Para cada REP que tiver os 4 segundos de TUT será equivalente de puxado 2KG naquela REP
+  Adicionar depois:
+    totalLoad: series * reps * weight + (tutsUsed * 2)
+  
+  */
+
   // Desestruturar os dados recebidos
   const {
     seriesChest,
@@ -47,6 +75,10 @@ function saveMessages(data) {
 
   if (dayNumber === 1) {
     let newExerciseFormDay = exerciseFormDB.push();
+    let tricepsOverload = tutTriceps * 2;
+    let chestOverload = tutChest * 2;
+    let legsOverload = tutLegs * 2;
+
     newExerciseFormDay.set({
       seriesChest: Number(seriesChest) || null,
       day: Number(dayNumber),
@@ -71,9 +103,18 @@ function saveMessages(data) {
       runTime: null,
       runDistance: null,
       timestamp: timestamp,
+      dateTime: convertTimestampToBRFormat(timestamp),
+      totalLoadTriceps:
+        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
+      totalLoadChest: seriesChest * repsChest + chestOverload,
+      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
     });
   } else if (dayNumber === 2) {
     let newExerciseFormDay = exerciseFormDB.push();
+
+    let shouldersOverload = tutShoulders * 2;
+    let bicepsOverload = tutBiceps * 2;
+
     newExerciseFormDay.set({
       seriesChest: null,
       day: Number(dayNumber),
@@ -98,6 +139,11 @@ function saveMessages(data) {
       runTime: null,
       runDistance: null,
       timestamp: timestamp,
+      dateTime: convertTimestampToBRFormat(timestamp),
+      totalLoadBiceps:
+        seriesBiceps * repsBiceps * weightBiceps + bicepsOverload,
+      totalLoadShoulders:
+        seriesShoulders * repsShoulders * weightShoulders + shouldersOverload,
     });
   } else if (dayNumber === 3) {
     let newExerciseFormDay = exerciseFormDB.push();
@@ -125,6 +171,7 @@ function saveMessages(data) {
       runTime: Number(runTime) || null,
       runDistance: Number(runDistance) || null,
       timestamp: timestamp,
+      dateTime: convertTimestampToBRFormat(timestamp),
     });
   }
 }

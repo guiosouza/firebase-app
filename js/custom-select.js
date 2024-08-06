@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="reps-chest" name="reps-chest" min="1" />
         </div>
         <div class="input-group">
-          <label for="tut-chest">TUT Excêntrica (segundos):</label>
+          <label for="tut-chest">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
         </div>
         <div class="input-group" style="margin-top: 96px">
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="weight-legs" name="weight-legs" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-legs">TUT Excêntrica (segundos):</label>
+          <label for="tut-legs">Quantas séries TUT Excêntrica (4 segundos):</label>
           <input type="number" id="tut-legs" name="tut-legs" min="0" step="0.1" />
         </div>
         <div class="input-group" style="margin-top: 96px">
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="weight-triceps" name="weight-triceps" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-triceps">TUT Excêntrica (segundos):</label>
+          <label for="tut-triceps">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input type="number" id="tut-triceps" name="tut-triceps" min="0" step="0.1" />
         </div>
       `;
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="weight-shoulders" name="weight-shoulders" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-shoulders">TUT Excêntrica (segundos):</label>
+          <label for="tut-shoulders">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input type="number" id="tut-shoulders" name="tut-shoulders" min="0" step="0.1" />
         </div>
          <div class="input-group" style="margin-top: 96px">
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input type="number" id="weight-biceps" name="weight-biceps" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-biceps">TUT Excêntrica (segundos):</label>
+          <label for="tut-biceps">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input type="number" id="tut-biceps" name="tut-biceps" min="0" step="0.1" />
         </div>
       `;

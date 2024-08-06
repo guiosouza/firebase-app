@@ -106,14 +106,11 @@ function renderCards(exercises) {
   // Objeto de mapeamento para traduzir e formatar os campos
   const fieldMap = {
     repsChest: "Repetições de peito",
-    tutChest: "Tempo sob tensão (peito)",
     repsLeg: "Repetições de perna",
     repsTriceps: "Repetições de tríceps",
     seriesChest: "Séries de peito",
     seriesLeg: "Séries de perna",
     seriesTriceps: "Séries de tríceps",
-    tutLegs: "Tempo sob tensão (pernas)",
-    tutTriceps: "Tempo sob tensão (tríceps)",
     weightLeg: "Peso (perna)",
     weightTriceps: "Peso (tríceps)",
     runDistance: "Distância percorrida (KM)",
@@ -121,11 +118,11 @@ function renderCards(exercises) {
     seriesShoulders: "Séries de ombros",
     repsShoulders: "Repetições de ombros",
     weightShoulders: "Peso (ombros)",
-    tutShoulders: "Tempo sob tensão (ombros)",
     seriesBiceps: "Séries de bíceps",
     repsBiceps: "Repetições de bíceps",
     weightBiceps: "Peso (bíceps)",
-    tutBiceps: "Tempo sob tensão (bíceps)",
+    totalLoadBiceps: "Total sobrecarga nos bíceps",
+    totalLoadShoulders: "Total de sobrecarga nos ombros",
   };
 
   // Função para agrupar exercícios por categoria
@@ -133,9 +130,9 @@ function renderCards(exercises) {
     const categories = {
       Peito: [],
       Perna: [],
-      Tríceps: [],
+      Triceps: [],
       Ombros: [],
-      Bíceps: [],
+      Biceps: [],
       Corrida: [],
     };
 
@@ -149,11 +146,11 @@ function renderCards(exercises) {
         } else if (key.includes("Leg")) {
           categories.Perna.push(p);
         } else if (key.includes("Triceps")) {
-          categories.Tríceps.push(p);
+          categories.Triceps.push(p);
         } else if (key.includes("Shoulders")) {
           categories.Ombros.push(p);
         } else if (key.includes("Biceps")) {
-          categories.Bíceps.push(p);
+          categories.Biceps.push(p);
         } else if (key.includes("run")) {
           categories.Corrida.push(p);
         }
@@ -172,10 +169,15 @@ function renderCards(exercises) {
     img.alt = `Card para o dia ${exercise.day}`;
 
     const title = document.createElement("h2");
+    const dateTime = document.createElement("p");
     title.textContent = `Dia ${exercise.day}`;
+    dateTime.textContent = `Dia e hora de treino: ${
+      exercise.dateTime ? exercise.dateTime : "Sem dados para exibir"
+    }`;
 
     card.appendChild(img);
     card.appendChild(title);
+    card.appendChild(dateTime);
 
     const categories = groupByCategory(exercise);
 
