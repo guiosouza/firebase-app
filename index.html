@@ -61,10 +61,18 @@
           </form>
         </main>
       </section>
+      <section>
+        <div id="success-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">×</span>
+            <p>Formulário enviado com sucesso!</p>
+            <button onclick="reloadPage()">OK</button>
+          </div>
+        </div>
+      </section>
     </div>
-
-    <script type="module" src="./js/carousel.js"></script>
     <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/carousel.js"></script>
     <script type="module" src="./js/functions.js"></script>
     <script type="module" src="./js/custom-select.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>

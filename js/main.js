@@ -35,6 +35,26 @@ function convertTimestampToBRFormat(timestamp) {
   return formattedDate;
 }
 
+// Função para mostrar a modal de sucesso
+function showSuccessModal() {
+  document.getElementById("success-modal").style.display = "block";
+}
+
+// Função para fechar a modal de sucesso
+function closeModal() {
+  document.getElementById("success-modal").style.display = "none";
+  reloadPage(); // Recarrega a página ao fechar a modal
+}
+
+// Função para recarregar a página
+function reloadPage() {
+  location.reload();
+}
+
+window.closeModal = closeModal;
+window.showSuccessModal = showSuccessModal;
+window.reloadPage = reloadPage;
+
 function saveMessages(data) {
   /*
   CÁLCULO DE CARGA TOTAL 
@@ -301,4 +321,6 @@ function submitForm(event) {
       timestamp: Date.now(),
     });
   }
+
+  showSuccessModal();
 }
