@@ -2,12 +2,19 @@
   overflow: hidden;
 }
 
+.align-right {
+  text-align: left;
+}
+
+.items-listing {
+  margin: 4px;
+}
+
 .carousel {
   display: flex;
   flex-direction: column;
   touch-action: pan-x;
   user-select: none;
-  cursor: grab;
   transition: transform 0.1s ease-out;
 }
 
@@ -30,4 +37,13 @@
 .card img {
   max-width: 100%;
   border-radius: 10px;
+}
+
+.category {
+  margin-bottom: 48px;
+  margin-top: 48px;
+}
+
+.category h3 {
+  margin: 8px;
 }

@@ -1,69 +1,3 @@
-const carousel = document.getElementById("carousel");
-let isDragging = false;
-let startPos = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let animationID;
-let currentIndex = 0;
-
-carousel.addEventListener("touchstart", touchStart);
-carousel.addEventListener("touchend", touchEnd);
-carousel.addEventListener("touchmove", touchMove);
-carousel.addEventListener("mousedown", touchStart);
-carousel.addEventListener("mouseup", touchEnd);
-carousel.addEventListener("mouseleave", touchEnd);
-carousel.addEventListener("mousemove", touchMove);
-
-function touchStart(event) {
-  isDragging = true;
-  startPos = getPositionY(event); // Usa a função getPositionY
-  animationID = requestAnimationFrame(animation);
-  carousel.classList.add("grabbing");
-}
-
-function touchEnd() {
-  isDragging = false;
-  cancelAnimationFrame(animationID);
-  carousel.classList.remove("grabbing");
-
-  // Limita a rolagem para não ultrapassar os limites do carrossel
-  currentTranslate = Math.max(
-    Math.min(currentTranslate, 0),
-    -getMaxTranslate()
-  );
-
-  // Atualiza prevTranslate
-  prevTranslate = currentTranslate;
-
-  // Ajusta a posição final para o cartão mais próximo
-  setSliderPosition();
-}
-
-function touchMove(event) {
-  if (isDragging) {
-    const currentPosition = getPositionY(event); // Usa a função getPositionY
-    currentTranslate = prevTranslate + currentPosition - startPos;
-    setSliderPosition();
-  }
-}
-
-function getPositionY(event) {
-  return event.type.includes("mouse") ? event.pageY : event.touches[0].clientY;
-}
-
-function animation() {
-  if (isDragging) requestAnimationFrame(animation);
-}
-
-function setSliderPosition() {
-  carousel.style.transform = `translateY(${currentTranslate}px)`; // Altera para translateY
-}
-
-function getMaxTranslate() {
-  // Calcula o valor máximo que pode ser arrastado (altura total do carrossel - altura do container)
-  return carousel.scrollHeight - carousel.offsetHeight;
-}
-
 // Inicialize o Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyARzjV2HNxKXvXcEeyzbAmyuSfQ2haH7KU",
@@ -139,6 +73,8 @@ function renderCards(exercises) {
     for (let key in exercise) {
       if (key !== "id" && key !== "day" && key !== "timestamp") {
         let p = document.createElement("p");
+        p.classList.add("align-right");
+        p.classList.add("items-listing");
         p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
 
         if (key.includes("Chest")) {
@@ -184,10 +120,16 @@ function renderCards(exercises) {
     // Adicionar os detalhes dos exercícios agrupados por categoria
     for (let category in categories) {
       if (categories[category].length > 0) {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("category");
+
         const categoryTitle = document.createElement("h3");
+        categoryTitle.classList.add("align-right");
         categoryTitle.textContent = category;
-        card.appendChild(categoryTitle);
-        categories[category].forEach((p) => card.appendChild(p));
+
+        categoryDiv.appendChild(categoryTitle);
+        categories[category].forEach((p) => categoryDiv.appendChild(p));
+        card.appendChild(categoryDiv);
       }
     }
 
