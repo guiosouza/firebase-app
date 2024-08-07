@@ -1,0 +1,54 @@
+.carousel-container {
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  transition: transform 0.1s ease-out;
+}
+
+.carousel.grabbing {
+  cursor: grabbing;
+  transition: none;
+}
+
+.exercise-card {
+  margin-bottom: 18px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  flex-shrink: 0;
+  border: 0.5px solid #a8a8a8;
+}
+
+.exercise-card h2 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.exercise-date {
+  margin: 0 0 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.exercise-category {
+  margin: 20px 0;
+}
+
+.category-title {
+  margin: 0 0 10px;
+  font-size: 1em;
+  color: #333;
+}
+
+.exercise-detail {
+  margin: 4px 0;
+  font-size: 0.9em;
+  color: #555;
+}

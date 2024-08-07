@@ -1,4 +1,4 @@
-// Inicialize o Firebase
+// Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyARzjV2HNxKXvXcEeyzbAmyuSfQ2haH7KU",
   authDomain: "my-private-app-7e1c1.firebaseapp.com",
@@ -9,11 +9,10 @@ const firebaseConfig = {
   appId: "1:443117665061:web:48abf382af18ff24c8f8cc",
 };
 
-// Inicialize o Firebase
 firebase.initializeApp(firebaseConfig);
 const exerciseFormDB = firebase.database().ref("exerciseForm");
 
-// Função para carregar os dados do Firebase
+// Carregar dados do Firebase
 function loadExercises() {
   exerciseFormDB.once("value", (snapshot) => {
     const data = snapshot.val();
@@ -27,17 +26,16 @@ function loadExercises() {
     // Ordenar os exercícios em ordem decrescente
     exercises.sort((a, b) => b.timestamp - a.timestamp);
 
-    // Renderizar os cards
+    // Renderizar os cartões
     renderCards(exercises);
   });
 }
 
-// Função para renderizar os cards
+// Função para renderizar os cartões
 function renderCards(exercises) {
   const carousel = document.getElementById("carousel");
   carousel.innerHTML = ""; // Limpar o conteúdo existente
 
-  // Objeto de mapeamento para traduzir e formatar os campos
   const fieldMap = {
     repsChest: "Repetições de peito",
     repsLeg: "Repetições de perna",
@@ -63,7 +61,6 @@ function renderCards(exercises) {
     tutLegs: "Total de reps usando pernas (TUT)",
   };
 
-  // Função para agrupar exercícios por categoria
   function groupByCategory(exercise) {
     const categories = {
       Peito: [],
@@ -77,8 +74,7 @@ function renderCards(exercises) {
     for (let key in exercise) {
       if (key !== "id" && key !== "day" && key !== "timestamp") {
         let p = document.createElement("p");
-        p.classList.add("align-right");
-        p.classList.add("items-listing");
+        p.classList.add("exercise-detail");
         p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
 
         if (key.includes("Chest")) {
@@ -102,33 +98,29 @@ function renderCards(exercises) {
 
   exercises.forEach((exercise) => {
     const card = document.createElement("div");
-    card.classList.add("card");
-
-    const img = document.createElement("img");
-    img.src = "https://via.placeholder.com/150";
-    img.alt = `Card para o dia ${exercise.day}`;
+    card.classList.add("exercise-card");
 
     const title = document.createElement("h2");
-    const dateTime = document.createElement("p");
     title.textContent = `Dia ${exercise.day}`;
+
+    const dateTime = document.createElement("p");
+    dateTime.classList.add("exercise-date");
     dateTime.textContent = `Dia e hora de treino: ${
       exercise.dateTime ? exercise.dateTime : "Sem dados para exibir"
     }`;
 
-    card.appendChild(img);
     card.appendChild(title);
     card.appendChild(dateTime);
 
     const categories = groupByCategory(exercise);
 
-    // Adicionar os detalhes dos exercícios agrupados por categoria
     for (let category in categories) {
       if (categories[category].length > 0) {
         const categoryDiv = document.createElement("div");
-        categoryDiv.classList.add("category");
+        categoryDiv.classList.add("exercise-category");
 
         const categoryTitle = document.createElement("h3");
-        categoryTitle.classList.add("align-right");
+        categoryTitle.classList.add("category-title");
         categoryTitle.textContent = category;
 
         categoryDiv.appendChild(categoryTitle);

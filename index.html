@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulário de treino</title>
     <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/carousel.css" />
-    <link rel="stylesheet" href="./css/custom-select.css" />
+    <link rel="stylesheet" href="./components/carousel-cards/carousel.css" />
+    <link
+      rel="stylesheet"
+      href="./components/custom-select/custom-select.css"
+    />
   </head>
   <body>
     <div class="page-container">
@@ -39,10 +42,20 @@
         </header>
         <div id="record-container"></div>
         <main>
-          <div class="training-list">
+          <div class="links-container">
             <h4>
-              Veja os últimos treinos
-              <a href="./training-listing.html" target="_blank">aqui</a>
+              Veja os dias treinados
+              <a
+                href="./pages/workout-list/workout-list.html.html"
+                target="_blank"
+                >aqui</a
+              >
+            </h4>
+          </div>
+          <div class="links-container">
+            <h4>
+              Veja seus records
+              <a href="./pages/records/records.html" target="_blank">aqui</a>
             </h4>
           </div>
           <form action="" id="exercise-form">
@@ -72,9 +85,15 @@
       </section>
     </div>
     <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./js/carousel.js"></script>
+    <script
+      type="module"
+      src="./components/carousel-cards/carousel.js"
+    ></script>
     <script type="module" src="./js/functions.js"></script>
-    <script type="module" src="./js/custom-select.js"></script>
+    <script
+      type="module"
+      src="./components/custom-select/custom-select.js"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
   </body>
 </html>
