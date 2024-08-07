@@ -27,7 +27,7 @@ const firebaseConfig = {
 
 // initialize firebase
 firebase.initializeApp(firebaseConfig);
-const exerciseFormDB = firebase.database().ref("exerciseForm");
+// const exerciseFormDB = firebase.database().ref("exerciseForm");
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -55,12 +55,34 @@ logOutEl.addEventListener("click", function () {
 });
 
 onAuthStateChanged(auth, async function (user) {
+  const profilePicture = document.getElementById("profile-picture");
+  const welcomeHeader = document.getElementById("welcome");
+
   if (user) {
     viewLoggedIn.style.display = "block";
     viewLoggedOut.style.display = "none";
+
+    // Atualize a foto do perfil
+    if (user.photoURL) {
+      profilePicture.src = user.photoURL;
+      profilePicture.style.display = "block";
+    } else {
+      profilePicture.style.display = "none";
+    }
+
+    // Atualize a saudação com o nome do usuário
+    if (user.displayName) {
+      welcomeHeader.textContent = `Olá, ${user.displayName}`;
+      welcomeHeader.style.display = "block";
+    } else {
+      welcomeHeader.textContent = `Olá!`;
+      welcomeHeader.style.display = "block";
+    }
   } else {
     viewLoggedIn.style.display = "none";
     viewLoggedOut.style.display = "block";
+    profilePicture.style.display = "none";
+    welcomeHeader.style.display = "none";
   }
 });
 

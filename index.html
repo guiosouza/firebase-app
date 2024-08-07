@@ -19,44 +19,63 @@
         </div>
       </section>
       <section id="view-logged-in">
-        <header>
+        <header id="header-home">
           <h3 id="log-out-button">Log out</h3>
-          <div class="carousel-container">
-            <div class="carousel" id="carousel">
-              <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card 1" />
-                <h2>Dia 1</h2>
-                <p>Peito, perna e tríceps</p>
-              </div>
-              <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card 2" />
-                <h2>Dia 2</h2>
-                <p>Ombro e bíceps</p>
-              </div>
-              <div class="card">
-                <img src="https://via.placeholder.com/150" alt="Card 3" />
-                <h2>Dia 3</h2>
-                <p>Corrida ou aeróbico</p>
-              </div>
+          <div id="user-welcome">
+            <img
+              id="profile-picture"
+              src=""
+              alt="Profile Picture"
+              style="
+                display: none;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+              "
+            />
+            <p
+              id="welcome"
+              alt="boas-vindas"
+              style="display: none; border-radius: 50%; font-size: 15px"
+            ></p>
+          </div>
+          <div class="divider"></div>
+        </header>
+        <div class="carousel-container">
+          <div class="carousel" id="carousel">
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 1" />
+              <h2>Dia 1</h2>
+              <p>Peito, perna e tríceps</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 2" />
+              <h2>Dia 2</h2>
+              <p>Ombro e bíceps</p>
+            </div>
+            <div class="card">
+              <img src="https://via.placeholder.com/150" alt="Card 3" />
+              <h2>Dia 3</h2>
+              <p>Corrida ou aeróbico</p>
             </div>
           </div>
-        </header>
+        </div>
+
         <div id="record-container"></div>
         <main>
           <div class="links-container">
-            <h4>
-              Veja os dias treinados
-              <a href="./pages/workout-list/workout-list.html" target="_blank"
-                >aqui</a
+            <p>
+              <a href="./pages/workout-list/workout-list.html" target="_blank">
+                Dias treinados</a
               >
-            </h4>
+            </p>
+            <p>
+              <a href="./pages/records/records.html" target="_blank"
+                >Recordes</a
+              >
+            </p>
           </div>
-          <div class="links-container">
-            <h4>
-              Veja seus records
-              <a href="./pages/records/records.html" target="_blank">aqui</a>
-            </h4>
-          </div>
+          <div class="links-container"></div>
           <form action="" id="exercise-form">
             <div class="day-options-container">
               <select id="day-select" class="dropdown-options">
