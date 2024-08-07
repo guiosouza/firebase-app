@@ -58,7 +58,7 @@ function loadExercises(uid) {
         // Renderizar os cartões
         renderCards(exercises);
       } else {
-        console.log("Nenhum exercício encontrado para este usuário.");
+        showNoDataMessage();
       }
     })
     .catch((error) => {
@@ -168,5 +168,7 @@ function renderCards(exercises) {
   });
 }
 
-// // Chamar a função para carregar os exercícios quando a página carregar
-// document.addEventListener("DOMContentLoaded", loadExercises);
+function showNoDataMessage() {
+  const noDataMessage = document.getElementById("no-data-message");
+  noDataMessage.style.display = "block";
+}
