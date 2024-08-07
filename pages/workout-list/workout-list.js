@@ -1,3 +1,18 @@
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  child,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyARzjV2HNxKXvXcEeyzbAmyuSfQ2haH7KU",
@@ -10,25 +25,45 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
 const exerciseFormDB = firebase.database().ref("exerciseForm");
 
-// Carregar dados do Firebase
-function loadExercises() {
-  exerciseFormDB.once("value", (snapshot) => {
-    const data = snapshot.val();
-    const exercises = [];
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    loadExercises(user.uid); // Passando o UID do usuário autenticado
+  } else {
+    // Redirecionar ou mostrar mensagem caso o usuário não esteja autenticado
+    console.log("Usuário não autenticado");
+  }
+});
 
-    // Transformar os dados em um array e adicionar o ID
-    for (let id in data) {
-      exercises.push({ id, ...data[id] });
-    }
+function loadExercises(uid) {
+  const userRef = ref(database, `users/${uid}/exerciseForm`);
+  get(userRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const exercises = [];
 
-    // Ordenar os exercícios em ordem decrescente
-    exercises.sort((a, b) => b.timestamp - a.timestamp);
+        // Transformar os dados em um array e adicionar o ID
+        for (let id in data) {
+          exercises.push({ id, ...data[id] });
+        }
 
-    // Renderizar os cartões
-    renderCards(exercises);
-  });
+        // Ordenar os exercícios em ordem decrescente
+        exercises.sort((a, b) => b.timestamp - a.timestamp);
+
+        // Renderizar os cartões
+        renderCards(exercises);
+      } else {
+        console.log("Nenhum exercício encontrado para este usuário.");
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar dados:", error);
+    });
 }
 
 // Função para renderizar os cartões
@@ -133,5 +168,5 @@ function renderCards(exercises) {
   });
 }
 
-// Chamar a função para carregar os exercícios quando a página carregar
-document.addEventListener("DOMContentLoaded", loadExercises);
+// // Chamar a função para carregar os exercícios quando a página carregar
+// document.addEventListener("DOMContentLoaded", loadExercises);

@@ -1,3 +1,20 @@
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  onValue,
+  remove,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyARzjV2HNxKXvXcEeyzbAmyuSfQ2haH7KU",
   authDomain: "my-private-app-7e1c1.firebaseapp.com",
@@ -11,7 +28,41 @@ const firebaseConfig = {
 // initialize firebase
 firebase.initializeApp(firebaseConfig);
 const exerciseFormDB = firebase.database().ref("exerciseForm");
-let inputFieldEl = document.getElementById("series-chest");
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+const viewLoggedOut = document.getElementById("view-logged-out");
+const viewLoggedIn = document.getElementById("view-logged-in");
+
+const continueWithGoogleEl = document.getElementById("google-button");
+const logOutEl = document.getElementById("log-out-button");
+
+continueWithGoogleEl.addEventListener("click", function () {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log("logged in with Google");
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
+});
+
+logOutEl.addEventListener("click", function () {
+  signOut(auth);
+});
+
+onAuthStateChanged(auth, function (user) {
+  if (user) {
+    viewLoggedIn.style.display = "block";
+    viewLoggedOut.style.display = "none";
+  } else {
+    viewLoggedIn.style.display = "none";
+    viewLoggedOut.style.display = "block";
+  }
+});
 
 document.getElementById("exercise-form").addEventListener("submit", submitForm);
 
@@ -56,15 +107,16 @@ window.showSuccessModal = showSuccessModal;
 window.reloadPage = reloadPage;
 
 function saveMessages(data) {
-  /*
-  CÁLCULO DE CARGA TOTAL 
-  Para cada REP que tiver os 4 segundos de TUT será equivalente de puxado 2KG naquela REP
-  Adicionar depois:
-    totalLoad: series * reps * weight + (tutsUsed * 2)
-  
-  */
+  const user = auth.currentUser;
+  if (!user) {
+    console.error("User is not authenticated");
+    return;
+  }
 
-  // Desestruturar os dados recebidos
+  const userId = user.uid;
+  const userExerciseFormDB = ref(database, `users/${userId}/exerciseForm`);
+  const newExerciseFormDay = push(userExerciseFormDB);
+
   const {
     seriesChest,
     dayNumber,
@@ -91,109 +143,40 @@ function saveMessages(data) {
     timestamp,
   } = data;
 
-  console.log("timestamp", timestamp);
+  const formattedData = {
+    seriesChest: Number(seriesChest) || null,
+    day: Number(dayNumber),
+    repsChest: Number(repsChest) || null,
+    tutChest: Number(tutChest) || null,
+    seriesLeg: Number(seriesLeg) || null,
+    repsLeg: Number(repsLeg) || null,
+    weightLeg: Number(weightLeg) || null,
+    tutLegs: Number(tutLegs) || null,
+    seriesTriceps: Number(seriesTriceps) || null,
+    repsTriceps: Number(repsTriceps) || null,
+    weightTriceps: Number(weightTriceps) || null,
+    tutTriceps: Number(tutTriceps) || null,
+    seriesShoulders: Number(seriesShoulders) || null,
+    repsShoulders: Number(repsShoulders) || null,
+    weightShoulders: Number(weightShoulders) || null,
+    tutShoulders: Number(tutShoulders) || null,
+    seriesBiceps: Number(seriesBiceps) || null,
+    repsBiceps: Number(repsBiceps) || null,
+    weightBiceps: Number(weightBiceps) || null,
+    tutBiceps: Number(tutBiceps) || null,
+    runTime: Number(runTime) || null,
+    runDistance: Number(runDistance) || null,
+    timestamp: timestamp,
+    dateTime: convertTimestampToBRFormat(timestamp),
+  };
 
-  if (dayNumber === 1) {
-    let newExerciseFormDay = exerciseFormDB.push();
-    let tricepsOverload = tutTriceps * 2;
-    let chestOverload = tutChest * 2;
-    let legsOverload = tutLegs * 2;
-
-    newExerciseFormDay.set({
-      seriesChest: Number(seriesChest) || null,
-      day: Number(dayNumber),
-      repsChest: Number(repsChest) || null,
-      tutChest: Number(tutChest) || null,
-      seriesLeg: Number(seriesLeg) || null,
-      repsLeg: Number(repsLeg) || null,
-      weightLeg: Number(weightLeg) || null,
-      tutLegs: Number(tutLegs) || null,
-      seriesTriceps: Number(seriesTriceps) || null,
-      repsTriceps: Number(repsTriceps) || null,
-      weightTriceps: Number(weightTriceps) || null,
-      tutTriceps: Number(tutTriceps) || null,
-      seriesShoulders: null,
-      repsShoulders: null,
-      weightShoulders: null,
-      tutShoulders: null,
-      seriesBiceps: null,
-      repsBiceps: null,
-      weightBiceps: null,
-      tutBiceps: null,
-      runTime: null,
-      runDistance: null,
-      timestamp: timestamp,
-      dateTime: convertTimestampToBRFormat(timestamp),
-      totalLoadTriceps:
-        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
-      totalLoadChest: seriesChest * repsChest + chestOverload,
-      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
+  set(newExerciseFormDay, formattedData)
+    .then(() => {
+      showSuccessModal();
+    })
+    .catch((error) => {
+      console.error("Error saving data:", error);
     });
-  } else if (dayNumber === 2) {
-    let newExerciseFormDay = exerciseFormDB.push();
-
-    let shouldersOverload = tutShoulders * 2;
-    let bicepsOverload = tutBiceps * 2;
-
-    newExerciseFormDay.set({
-      seriesChest: null,
-      day: Number(dayNumber),
-      repsChest: null,
-      tutChest: null,
-      seriesLeg: null,
-      repsLeg: null,
-      weightLeg: null,
-      tutLegs: null,
-      seriesTriceps: null,
-      repsTriceps: null,
-      weightTriceps: null,
-      tutTriceps: null,
-      seriesShoulders: Number(seriesShoulders) || null,
-      repsShoulders: Number(repsShoulders) || null,
-      weightShoulders: Number(weightShoulders) || null,
-      tutShoulders: Number(tutShoulders) || null,
-      seriesBiceps: Number(seriesBiceps) || null,
-      repsBiceps: Number(repsBiceps) || null,
-      weightBiceps: Number(weightBiceps) || null,
-      tutBiceps: Number(tutBiceps) || null,
-      runTime: null,
-      runDistance: null,
-      timestamp: timestamp,
-      dateTime: convertTimestampToBRFormat(timestamp),
-      totalLoadBiceps:
-        seriesBiceps * repsBiceps * weightBiceps + bicepsOverload,
-      totalLoadShoulders:
-        seriesShoulders * repsShoulders * weightShoulders + shouldersOverload,
-    });
-  } else if (dayNumber === 3) {
-    let newExerciseFormDay = exerciseFormDB.push();
-    newExerciseFormDay.set({
-      seriesChest: null,
-      day: Number(dayNumber),
-      repsChest: null,
-      tutChest: null,
-      seriesLeg: null,
-      repsLeg: null,
-      weightLeg: null,
-      tutLegs: null,
-      seriesTriceps: null,
-      repsTriceps: null,
-      weightTriceps: null,
-      tutTriceps: null,
-      seriesShoulders: null,
-      repsShoulders: null,
-      weightShoulders: null,
-      tutShoulders: null,
-      seriesBiceps: null,
-      repsBiceps: null,
-      weightBiceps: null,
-      tutBiceps: null,
-      runTime: Number(runTime) || null,
-      runDistance: Number(runDistance) || null,
-      timestamp: timestamp,
-      dateTime: convertTimestampToBRFormat(timestamp),
-    });
-  }
 }
 
 function getElementVal(id) {
@@ -213,7 +196,6 @@ function submitForm(event) {
   event.preventDefault();
 
   let dayNumber;
-
   let selectedOption = document.querySelector(".selected-option");
 
   if (selectedOption.innerHTML === "Dia 1") {
@@ -230,7 +212,7 @@ function submitForm(event) {
     let weightTriceps = getElementVal("weight-triceps");
     let tutTriceps = getElementVal("tut-triceps");
     saveMessages({
-      seriesChest: seriesChest,
+      seriesChest,
       dayNumber: Number(dayNumber),
       repsChest: Number(repsChest),
       tutChest: Number(tutChest),
@@ -264,7 +246,8 @@ function submitForm(event) {
     let repsBiceps = getElementVal("reps-biceps");
     let weightBiceps = getElementVal("weight-biceps");
     let tutBiceps = getElementVal("tut-biceps");
-    console.log(dayNumber);
+    let runTime = getElementVal("run-time");
+    let runDistance = getElementVal("run-distance");
     saveMessages({
       seriesChest: null,
       dayNumber: Number(dayNumber),
@@ -286,8 +269,8 @@ function submitForm(event) {
       repsBiceps: Number(repsBiceps),
       weightBiceps: Number(weightBiceps),
       tutBiceps: Number(tutBiceps),
-      runTime: null,
-      runDistance: null,
+      runTime: Number(runTime),
+      runDistance: Number(runDistance),
       timestamp: Date.now(),
     });
   } else if (selectedOption.innerHTML == "Dia 3") {
@@ -321,6 +304,4 @@ function submitForm(event) {
       timestamp: Date.now(),
     });
   }
-
-  showSuccessModal();
 }

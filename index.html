@@ -15,11 +15,12 @@
     <div class="page-container">
       <section id="view-logged-out">
         <div>
-          <button id="continue-with-google">LOGAR COM GOOGLE</button>
+          <button id="google-button">LOGAR COM GOOGLE</button>
         </div>
       </section>
       <section id="view-logged-in">
         <header>
+          <h3 id="log-out-button">Log out</h3>
           <div class="carousel-container">
             <div class="carousel" id="carousel">
               <div class="card">
@@ -45,9 +46,7 @@
           <div class="links-container">
             <h4>
               Veja os dias treinados
-              <a
-                href="./pages/workout-list/workout-list.html.html"
-                target="_blank"
+              <a href="./pages/workout-list/workout-list.html" target="_blank"
                 >aqui</a
               >
             </h4>
@@ -73,8 +72,6 @@
             </div>
           </form>
         </main>
-      </section>
-      <section>
         <div id="success-modal" class="modal">
           <div class="modal-content">
             <span class="close-button" onclick="closeModal()">×</span>

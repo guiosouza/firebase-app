@@ -142,3 +142,16 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+
+#view-logged-in {
+  display: none;
+}
+
+#view-logged-out {
+  display: none;
+}
+
+#log-out-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
