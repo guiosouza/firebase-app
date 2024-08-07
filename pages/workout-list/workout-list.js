@@ -1,14 +1,10 @@
 import {
   getAuth,
   onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import {
   getDatabase,
   ref,
-  child,
   get,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
@@ -24,17 +20,15 @@ const firebaseConfig = {
   appId: "1:443117665061:web:48abf382af18ff24c8f8cc",
 };
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-const exerciseFormDB = firebase.database().ref("exerciseForm");
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    loadExercises(user.uid); // Passando o UID do usuário autenticado
+    loadExercises(user.uid);
   } else {
-    // Redirecionar ou mostrar mensagem caso o usuário não esteja autenticado
     console.log("Usuário não autenticado");
   }
 });
@@ -45,17 +39,9 @@ function loadExercises(uid) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const exercises = [];
+        const exercises = Object.keys(data).map((id) => ({ id, ...data[id] }));
 
-        // Transformar os dados em um array e adicionar o ID
-        for (let id in data) {
-          exercises.push({ id, ...data[id] });
-        }
-
-        // Ordenar os exercícios em ordem decrescente
         exercises.sort((a, b) => b.timestamp - a.timestamp);
-
-        // Renderizar os cartões
         renderCards(exercises);
       } else {
         showNoDataMessage();
@@ -63,13 +49,15 @@ function loadExercises(uid) {
     })
     .catch((error) => {
       console.error("Erro ao buscar dados:", error);
+    })
+    .finally(() => {
+      document.getElementById("loading-message").style.display = "none";
     });
 }
 
-// Função para renderizar os cartões
 function renderCards(exercises) {
   const carousel = document.getElementById("carousel");
-  carousel.innerHTML = ""; // Limpar o conteúdo existente
+  carousel.innerHTML = "";
 
   const fieldMap = {
     repsChest: "Repetições de peito",
@@ -95,41 +83,6 @@ function renderCards(exercises) {
     tutBiceps: "Total de reps usando bíceps (TUT)",
     tutLegs: "Total de reps usando pernas (TUT)",
   };
-
-  function groupByCategory(exercise) {
-    const categories = {
-      Peito: [],
-      Perna: [],
-      Triceps: [],
-      Ombros: [],
-      Biceps: [],
-      Corrida: [],
-    };
-
-    for (let key in exercise) {
-      if (key !== "id" && key !== "day" && key !== "timestamp") {
-        let p = document.createElement("p");
-        p.classList.add("exercise-detail");
-        p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
-
-        if (key.includes("Chest")) {
-          categories.Peito.push(p);
-        } else if (key.includes("Leg")) {
-          categories.Perna.push(p);
-        } else if (key.includes("Triceps")) {
-          categories.Triceps.push(p);
-        } else if (key.includes("Shoulders")) {
-          categories.Ombros.push(p);
-        } else if (key.includes("Biceps")) {
-          categories.Biceps.push(p);
-        } else if (key.includes("run")) {
-          categories.Corrida.push(p);
-        }
-      }
-    }
-
-    return categories;
-  }
 
   exercises.forEach((exercise) => {
     const card = document.createElement("div");
@@ -168,7 +121,67 @@ function renderCards(exercises) {
   });
 }
 
+function groupByCategory(exercise) {
+  const categories = {
+    Peito: [],
+    Perna: [],
+    Triceps: [],
+    Ombros: [],
+    Biceps: [],
+    Corrida: [],
+  };
+
+  const fieldMap = {
+    repsChest: "Repetições de peito",
+    repsLeg: "Repetições de perna",
+    repsTriceps: "Repetições de tríceps",
+    seriesChest: "Séries de peito",
+    seriesLeg: "Séries de perna",
+    seriesTriceps: "Séries de tríceps",
+    weightLeg: "Peso perna (KG)",
+    weightTriceps: "Peso tríceps (KG)",
+    runDistance: "Distância percorrida (KM)",
+    runTime: "Tempo de corrida",
+    seriesShoulders: "Séries de ombros",
+    repsShoulders: "Repetições de ombros",
+    weightShoulders: "Peso ombro (KG)",
+    seriesBiceps: "Séries de bíceps",
+    repsBiceps: "Repetições de bíceps",
+    weightBiceps: "Peso bíceps (KG)",
+    totalLoadBiceps: "Total sobrecarga nos bíceps",
+    totalLoadShoulders: "Total de sobrecarga nos ombros",
+    tutTriceps: "Total de reps tríceps (TUT)",
+    tutShoulders: "Total de reps usando ombro (TUT)",
+    tutBiceps: "Total de reps usando bíceps (TUT)",
+    tutLegs: "Total de reps usando pernas (TUT)",
+  };
+
+  for (let key in exercise) {
+    if (key !== "id" && key !== "day" && key !== "timestamp") {
+      let p = document.createElement("p");
+      p.classList.add("exercise-detail");
+      p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
+
+      if (key.includes("Chest")) {
+        categories.Peito.push(p);
+      } else if (key.includes("Leg")) {
+        categories.Perna.push(p);
+      } else if (key.includes("Triceps")) {
+        categories.Triceps.push(p);
+      } else if (key.includes("Shoulders")) {
+        categories.Ombros.push(p);
+      } else if (key.includes("Biceps")) {
+        categories.Biceps.push(p);
+      } else if (key.includes("run")) {
+        categories.Corrida.push(p);
+      }
+    }
+  }
+
+  return categories;
+}
+
 function showNoDataMessage() {
-  const noDataMessage = document.getElementById("no-data-message");
-  noDataMessage.style.display = "block";
+  document.getElementById("loading-message").style.display = "none";
+  document.getElementById("no-data-message").style.display = "block";
 }

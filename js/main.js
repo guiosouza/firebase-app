@@ -54,7 +54,7 @@ logOutEl.addEventListener("click", function () {
   signOut(auth);
 });
 
-onAuthStateChanged(auth, function (user) {
+onAuthStateChanged(auth, async function (user) {
   if (user) {
     viewLoggedIn.style.display = "block";
     viewLoggedOut.style.display = "none";
