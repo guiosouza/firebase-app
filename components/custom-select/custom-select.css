@@ -4,7 +4,6 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  border: 1px solid #d9d9d9;
   border-top: none;
   background-color: white;
   max-height: 200px;
@@ -14,6 +13,8 @@
 
 .option-list.show {
   display: block;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
 .option-item {
@@ -22,5 +23,10 @@
 }
 
 .option-item:hover {
-  background-color: #eeeeee;
+  background-color: #dbdbdb;
+}
+
+.selected-option.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }

@@ -58,17 +58,22 @@ body {
 }
 
 .input-group label {
-  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   color: #ffff;
+  font-size: 15px;
 }
 
 .input-group input {
+  margin-top: 8px;
   font-size: 16px;
   width: 100%;
   box-sizing: border-box;
   padding: 14px;
-  border-radius: 4px;
-  border: 1px solid gray;
+}
+
+.input-form {
+  border-radius: 16px;
 }
 
 .custom-select {
@@ -78,6 +83,11 @@ body {
   border: 1px solid #494949;
   border-radius: 4px;
   background-color: white;
+  border-radius: 16px;
+}
+
+.custom-select.open {
+  border-radius: 16px 16px 0px 0px; /* Define as bordas de baixo como 0px */
 }
 
 .selected-option {

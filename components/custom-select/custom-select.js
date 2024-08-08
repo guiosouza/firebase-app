@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedOption.textContent = this.textContent;
         selectElement.value = this.dataset.value;
         optionList.classList.remove("show");
+        customSelect.classList.remove("open");
         createInputs(this.dataset.value);
       });
     }
@@ -45,12 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Adiciona evento para mostrar/ocultar a lista de opções
   selectedOption.addEventListener("click", function () {
     optionList.classList.toggle("show");
+    customSelect.classList.toggle("open");
   });
 
   // Fecha a lista de opções se clicar fora do select
   document.addEventListener("click", function (event) {
     if (!customSelect.contains(event.target)) {
       optionList.classList.remove("show");
+      selectedOption.classList.remove("active");
+      customSelect.classList.remove("open");
     }
   });
 
@@ -62,94 +66,93 @@ document.addEventListener("DOMContentLoaded", function () {
       inputsContainer.innerHTML = `
         <div class="input-group">
           <label for="series-chest">Séries de Peito:</label>
-          <input type="number" id="series-chest" name="series-chest" min="1" />
+          <input class="input-form" type="number" id="series-chest" name="series-chest" min="1" />
         </div>
         <div class="input-group">
           <label for="reps-chest">Reps por Série:</label>
-          <input type="number" id="reps-chest" name="reps-chest" min="1" />
+          <input class="input-form" type="number" id="reps-chest" name="reps-chest" min="1" />
         </div>
         <div class="input-group">
           <label for="tut-chest">Quantas séries de TUT Excêntrica (4 segundos):</label>
-          <input type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
+          <input class="input-form" type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
         </div>
         <div class="input-group" style="margin-top: 96px">
           <label for="series-legs">Séries de Perna:</label>
-          <input type="number" id="series-legs" name="series-legs" min="1" />
+          <input class="input-form" type="number" id="series-legs" name="series-legs" min="1" />
         </div>
         <div class="input-group">
           <label for="reps-legs">Reps por Série:</label>
-          <input type="number" id="reps-legs" name="reps-legs" min="1" />
+          <input class="input-form" type="number" id="reps-legs" name="reps-legs" min="1" />
         </div>
         <div class="input-group">
           <label for="weight-legs">Peso (kg):</label>
-          <input type="number" id="weight-legs" name="weight-legs" min="0" step="0.1" />
+          <input class="input-form" type="number" id="weight-legs" name="weight-legs" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-legs">Quantas séries TUT Excêntrica (4 segundos):</label>
-          <input type="number" id="tut-legs" name="tut-legs" min="0" step="0.1" />
+          <label for="tut-legs">Séries TUT Excêntrica (4 segundos):</label>
+          <input class="input-form" type="number" id="tut-legs" name="tut-legs" min="0" step="0.1" />
         </div>
         <div class="input-group" style="margin-top: 96px">
           <label for="series-triceps">Séries de Tríceps:</label>
-          <input type="number" id="series-triceps" name="series-triceps" min="1" />
+          <input class="input-form" type="number" id="series-triceps" name="series-triceps" min="1" />
         </div>
         <div class="input-group">
           <label for="reps-triceps">Reps por Série:</label>
-          <input type="number" id="reps-triceps" name="reps-triceps" min="1" />
+          <input class="input-form" type="number" id="reps-triceps" name="reps-triceps" min="1" />
         </div>
         <div class="input-group">
           <label for="weight-triceps">Peso (kg):</label>
-          <input type="number" id="weight-triceps" name="weight-triceps" min="0" step="0.1" />
+          <input class="input-form" type="number" id="weight-triceps" name="weight-triceps" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-triceps">Quantas séries de TUT Excêntrica (4 segundos):</label>
-          <input type="number" id="tut-triceps" name="tut-triceps" min="0" step="0.1" />
+          <label for="tut-triceps">Séries de TUT Excêntrica (4 segundos):</label>
+          <input class="input-form" type="number" id="tut-triceps" name="tut-triceps" min="0" step="0.1" />
         </div>
       `;
     } else if (day === "2") {
       inputsContainer.innerHTML = `
         <div class="input-group">
           <label for="series-shoulders">Séries de Ombro:</label>
-          <input type="number" id="series-shoulders" name="series-shoulders" min="1" />
+          <input class="input-form" type="number" id="series-shoulders" name="series-shoulders" min="1" />
         </div>
         <div class="input-group">
           <label for="reps-shoulders">Reps por Série:</label>
-          <input type="number" id="reps-shoulders" name="reps-shoulders" min="1" />
+          <input class="input-form" type="number" id="reps-shoulders" name="reps-shoulders" min="1" />
         </div>
         <div class="input-group">
           <label for="weight-shoulders">Peso (kg):</label>
-          <input type="number" id="weight-shoulders" name="weight-shoulders" min="0" step="0.1" />
+          <input class="input-form" type="number" id="weight-shoulders" name="weight-shoulders" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-shoulders">Quantas séries de TUT Excêntrica (4 segundos):</label>
-          <input type="number" id="tut-shoulders" name="tut-shoulders" min="0" step="0.1" />
+          <label for="tut-shoulders">Séries de TUT Excêntrica (4 segundos):</label>
+          <input class="input-form" type="number" id="tut-shoulders" name="tut-shoulders" min="0" step="0.1" />
         </div>
          <div class="input-group" style="margin-top: 96px">
           <label for="series-biceps">Séries de Bíceps:</label>
-          <input type="number" id="series-biceps" name="series-biceps" min="1" />
+          <input class="input-form" type="number" id="series-biceps" name="series-biceps" min="1" />
         </div>
         <div class="input-group">
           <label for="reps-biceps">Reps por Série:</label>
-         
-        <input type="number" id="reps-biceps" name="reps-biceps" min="1" />
+        <input class="input-form" type="number" id="reps-biceps" name="reps-biceps" min="1" />
         </div>
         <div class="input-group">
           <label for="weight-biceps">Peso (kg):</label>
-          <input type="number" id="weight-biceps" name="weight-biceps" min="0" step="0.1" />
+          <input class="input-form" type="number" id="weight-biceps" name="weight-biceps" min="0" step="0.1" />
         </div>
         <div class="input-group">
-          <label for="tut-biceps">Quantas séries de TUT Excêntrica (4 segundos):</label>
-          <input type="number" id="tut-biceps" name="tut-biceps" min="0" step="0.1" />
+          <label for="tut-biceps">Séries de TUT Excêntrica (4 segundos):</label>
+          <input class="input-form" type="number" id="tut-biceps" name="tut-biceps" min="0" step="0.1" />
         </div>
       `;
     } else if (day === "3") {
       inputsContainer.innerHTML = `
         <div class="input-group">
           <label for="run-time">Tempo de Corrida (minutos):</label>
-          <input type="number" id="run-time" name="run-time" min="0" step="0.1" />
+          <input class="input-form" type="number" id="run-time" name="run-time" min="0" step="0.1" />
         </div>
         <div class="input-group">
           <label for="run-distance">Distância (km):</label>
-          <input type="number" id="run-distance" name="run-distance" min="0" step="0.1" />
+          <input class="input-form" type="number" id="run-distance" name="run-distance" min="0" step="0.1" />
         </div>
       `;
     }
