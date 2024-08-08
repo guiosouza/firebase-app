@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 body {
   font-family: "Inconsolata", monospace;
@@ -82,6 +83,45 @@ body {
 .selected-option {
   padding: 16px;
   cursor: pointer;
+}
+
+#login-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-card h1 {
+  font-size: 26px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#google-button {
+  padding: 14px 21px;
+  border: 1px solid #f5f378;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 16px;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  color: #f5f378;
+  background-color: #1a1a1a;
+}
+
+#google-button:hover {
+  cursor: pointer;
+}
+
+#google-button:active {
+  transform: translateY(2px); /* Move o botão ligeiramente para baixo */
+  box-shadow: 0 2px 4px rgba(238, 238, 238, 0.2); /* Diminui a sombra para simular afundamento */
+}
+
+#google-button img {
+  height: 18px;
+  margin-right: 8px;
 }
 
 #submit-button {
