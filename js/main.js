@@ -261,6 +261,10 @@ function submitForm(event) {
       repsTriceps: Number(repsTriceps),
       weightTriceps: Number(weightTriceps),
       tutTriceps: Number(tutTriceps),
+      totalLoadTriceps:
+        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
+      totalLoadChest: seriesChest * repsChest + chestOverload,
+      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
       seriesShoulders: null,
       repsShoulders: null,
       weightShoulders: null,
@@ -272,10 +276,6 @@ function submitForm(event) {
       runTime: null,
       runDistance: null,
       timestamp: Date.now(),
-      totalLoadTriceps:
-        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
-      totalLoadChest: seriesChest * repsChest + chestOverload,
-      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
     });
   } else if (selectedOption.innerHTML === "Dia 2") {
     dayNumber = getDayNumberFromId("day2");
@@ -287,8 +287,6 @@ function submitForm(event) {
     let repsBiceps = getElementVal("reps-biceps");
     let weightBiceps = getElementVal("weight-biceps");
     let tutBiceps = getElementVal("tut-biceps");
-    let runTime = getElementVal("run-time");
-    let runDistance = getElementVal("run-distance");
 
     let shouldersOverload = tutShoulders * 2;
     let bicepsOverload = tutBiceps * 2;
@@ -314,19 +312,18 @@ function submitForm(event) {
       repsBiceps: Number(repsBiceps),
       weightBiceps: Number(weightBiceps),
       tutBiceps: Number(tutBiceps),
-      runTime: Number(runTime),
-      runDistance: Number(runDistance),
-      timestamp: Date.now(),
       totalLoadBiceps:
         seriesBiceps * repsBiceps * weightBiceps + bicepsOverload,
       totalLoadShoulders:
         seriesShoulders * repsShoulders * weightShoulders + shouldersOverload,
+      runTime: null,
+      runDistance: null,
+      timestamp: Date.now(),
     });
   } else if (selectedOption.innerHTML == "Dia 3") {
     dayNumber = getDayNumberFromId("day3");
     let runTime = getElementVal("run-time");
     let runDistance = getElementVal("run-distance");
-    console.log(dayNumber);
     saveMessages({
       seriesChest: null,
       dayNumber: Number(dayNumber),
