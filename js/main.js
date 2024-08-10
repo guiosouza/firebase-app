@@ -163,6 +163,11 @@ function saveMessages(data) {
     runTime,
     runDistance,
     timestamp,
+    totalLoadTriceps,
+    totalLoadChest,
+    totalLoadLegs,
+    totalLoadBiceps,
+    totalLoadShoulders,
   } = data;
 
   const formattedData = {
@@ -190,6 +195,11 @@ function saveMessages(data) {
     runDistance: Number(runDistance) || null,
     timestamp: timestamp,
     dateTime: convertTimestampToBRFormat(timestamp),
+    totalLoadTriceps: Number(totalLoadTriceps) || null,
+    totalLoadChest: Number(totalLoadChest) || null,
+    totalLoadLegs: Number(totalLoadLegs) || null,
+    totalLoadBiceps: Number(totalLoadBiceps) || null,
+    totalLoadShoulders: Number(totalLoadShoulders) || null,
   };
 
   set(newExerciseFormDay, formattedData)
@@ -233,6 +243,11 @@ function submitForm(event) {
     let repsTriceps = getElementVal("reps-triceps");
     let weightTriceps = getElementVal("weight-triceps");
     let tutTriceps = getElementVal("tut-triceps");
+
+    let tricepsOverload = tutTriceps * 2;
+    let chestOverload = tutChest * 2;
+    let legsOverload = tutLegs * 2;
+
     saveMessages({
       seriesChest,
       dayNumber: Number(dayNumber),
@@ -257,6 +272,10 @@ function submitForm(event) {
       runTime: null,
       runDistance: null,
       timestamp: Date.now(),
+      totalLoadTriceps:
+        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
+      totalLoadChest: seriesChest * repsChest + chestOverload,
+      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
     });
   } else if (selectedOption.innerHTML === "Dia 2") {
     dayNumber = getDayNumberFromId("day2");
@@ -270,6 +289,10 @@ function submitForm(event) {
     let tutBiceps = getElementVal("tut-biceps");
     let runTime = getElementVal("run-time");
     let runDistance = getElementVal("run-distance");
+
+    let shouldersOverload = tutShoulders * 2;
+    let bicepsOverload = tutBiceps * 2;
+
     saveMessages({
       seriesChest: null,
       dayNumber: Number(dayNumber),
@@ -294,6 +317,10 @@ function submitForm(event) {
       runTime: Number(runTime),
       runDistance: Number(runDistance),
       timestamp: Date.now(),
+      totalLoadBiceps:
+        seriesBiceps * repsBiceps * weightBiceps + bicepsOverload,
+      totalLoadShoulders:
+        seriesShoulders * repsShoulders * weightShoulders + shouldersOverload,
     });
   } else if (selectedOption.innerHTML == "Dia 3") {
     dayNumber = getDayNumberFromId("day3");

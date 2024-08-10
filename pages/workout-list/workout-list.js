@@ -59,31 +59,6 @@ function renderCards(exercises) {
   const carousel = document.getElementById("carousel");
   carousel.innerHTML = "";
 
-  const fieldMap = {
-    repsChest: "Repetições de peito",
-    repsLeg: "Repetições de perna",
-    repsTriceps: "Repetições de tríceps",
-    seriesChest: "Séries de peito",
-    seriesLeg: "Séries de perna",
-    seriesTriceps: "Séries de tríceps",
-    weightLeg: "Peso perna (KG)",
-    weightTriceps: "Peso tríceps (KG)",
-    runDistance: "Distância percorrida (KM)",
-    runTime: "Tempo de corrida",
-    seriesShoulders: "Séries de ombros",
-    repsShoulders: "Repetições de ombros",
-    weightShoulders: "Peso ombro (KG)",
-    seriesBiceps: "Séries de bíceps",
-    repsBiceps: "Repetições de bíceps",
-    weightBiceps: "Peso bíceps (KG)",
-    totalLoadBiceps: "Total sobrecarga nos bíceps",
-    totalLoadShoulders: "Total de sobrecarga nos ombros",
-    tutTriceps: "Total de reps tríceps (TUT)",
-    tutShoulders: "Total de reps usando ombro (TUT)",
-    tutBiceps: "Total de reps usando bíceps (TUT)",
-    tutLegs: "Total de reps usando pernas (TUT)",
-  };
-
   exercises.forEach((exercise) => {
     const card = document.createElement("div");
     card.classList.add("exercise-card");
@@ -148,12 +123,16 @@ function groupByCategory(exercise) {
     seriesBiceps: "Séries de bíceps",
     repsBiceps: "Repetições de bíceps",
     weightBiceps: "Peso bíceps (KG)",
-    totalLoadBiceps: "Total sobrecarga nos bíceps",
-    totalLoadShoulders: "Total de sobrecarga nos ombros",
-    tutTriceps: "Total de reps tríceps (TUT)",
-    tutShoulders: "Total de reps usando ombro (TUT)",
-    tutBiceps: "Total de reps usando bíceps (TUT)",
-    tutLegs: "Total de reps usando pernas (TUT)",
+    totalLoadChest: "Total carga no peito",
+    totalLoadBiceps: "Total carga nos bíceps",
+    totalLoadTriceps: "Total de carga nos tríceps",
+    totalLoadShoulders: "Total de carga nos ombros",
+    tutTriceps: "Total de reps com TUTs usando tríceps",
+    tutChest: "Total de reps TUTs usando o peito",
+    tutShoulders: "Total de reps com TUTs usando ombro",
+    tutBiceps: "Total de reps TUTs usando bíceps",
+    tutLegs: "Total de reps TUTs usando pernas",
+    totalLoadLegs: "Total de carga nas pernas: ",
   };
 
   for (let key in exercise) {
