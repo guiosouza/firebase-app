@@ -266,9 +266,9 @@ function submitForm(event) {
       weightTriceps: Number(weightTriceps),
       tutTriceps: Number(tutTriceps),
       totalLoadTriceps:
-        seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
-      totalLoadChest: seriesChest * repsChest * equivalentWeightChest + chestOverload - (discountOnFail * failTimesOnChest),
-      totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
+        (seriesTriceps * repsTriceps * weightTriceps + tricepsOverload).toFixed(3),
+      totalLoadChest: (seriesChest * repsChest * equivalentWeightChest + chestOverload - (discountOnFail * failTimesOnChest)).toFixed(3),
+      totalLoadLegs: (seriesLeg * repsLeg * weightLeg + legsOverload).toFixed(3),
       seriesShoulders: null,
       repsShoulders: null,
       weightShoulders: null,
