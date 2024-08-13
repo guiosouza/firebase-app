@@ -65,7 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (day === "1") {
       inputsContainer.innerHTML = `
         <div class="input-group">
-          <label for="series-chest">Séries de Peito:</label>
+          <label for="weight-chest">Seu peso:</label>
+          <input class="input-form" type="number" id="weight-chest" name="weight-chest" min="1" />
+        </div>
+        <div class="input-group">
+          <label for="series-chest">Séries de Flexões:</label>
           <input class="input-form" type="number" id="series-chest" name="series-chest" min="1" />
         </div>
         <div class="input-group">
@@ -75,6 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="input-group">
           <label for="tut-chest">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
+        </div>
+         <div class="input-group">
+          <label for="fail-chest">Quantas reps falhou:</label>
+          <input class="input-form" type="number" id="fail-chest" name="fail-chest" min="0" step="0.1" />
         </div>
         <div class="input-group" style="margin-top: 96px">
           <label for="series-legs">Séries de Perna:</label>

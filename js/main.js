@@ -235,6 +235,8 @@ function submitForm(event) {
     let seriesChest = getElementVal("series-chest");
     let repsChest = getElementVal("reps-chest");
     let tutChest = getElementVal("tut-chest");
+    let failTimesOnChest = getElementVal("fail-chest");
+    let weightChest = getElementVal("weight-chest");
     let seriesLeg = getElementVal("series-legs");
     let repsLeg = getElementVal("reps-legs");
     let weightLeg = getElementVal("weight-legs");
@@ -245,8 +247,10 @@ function submitForm(event) {
     let tutTriceps = getElementVal("tut-triceps");
 
     let tricepsOverload = tutTriceps * 2;
-    let chestOverload = tutChest * 2;
     let legsOverload = tutLegs * 2;
+    let equivalentWeightChest = weightChest * 0.70;
+    let discountOnFail = equivalentWeightChest / 2 
+    let chestOverload = tutChest * (equivalentWeightChest * 0.35);
 
     saveMessages({
       seriesChest,
@@ -263,7 +267,7 @@ function submitForm(event) {
       tutTriceps: Number(tutTriceps),
       totalLoadTriceps:
         seriesTriceps * repsTriceps * weightTriceps + tricepsOverload,
-      totalLoadChest: seriesChest * repsChest + chestOverload,
+      totalLoadChest: seriesChest * repsChest * equivalentWeightChest + chestOverload - (discountOnFail * failTimesOnChest),
       totalLoadLegs: seriesLeg * repsLeg * weightLeg + legsOverload,
       seriesShoulders: null,
       repsShoulders: null,
