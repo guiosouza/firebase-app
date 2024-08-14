@@ -64,10 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (day === "1") {
       inputsContainer.innerHTML = `
-        <div class="input-group">
-          <label for="weight-chest">Seu peso:</label>
-          <input class="input-form" type="number" id="weight-chest" name="weight-chest" min="1" />
-        </div>
+
         <div class="input-group">
           <label for="series-chest">Séries de Flexões:</label>
           <input class="input-form" type="number" id="series-chest" name="series-chest" min="1" />
@@ -80,10 +77,15 @@ document.addEventListener("DOMContentLoaded", function () {
           <label for="tut-chest">Quantas séries de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-chest" name="tut-chest" min="0" step="0.1" />
         </div>
-         <div class="input-group">
+        <div class="input-group">
           <label for="fail-chest">Quantas reps falhou:</label>
           <input class="input-form" type="number" id="fail-chest" name="fail-chest" min="0" step="0.1" />
         </div>
+        <div class="input-group">
+          <label for="weight-for-pushup">Seu peso:</label>
+          <input class="input-form" type="number" id="weight-for-pushup" name="weight-for-pushup" min="1" />
+        </div>
+
         <div class="input-group" style="margin-top: 96px">
           <label for="series-legs">Séries de Perna:</label>
           <input class="input-form" type="number" id="series-legs" name="series-legs" min="1" />
@@ -93,13 +95,18 @@ document.addEventListener("DOMContentLoaded", function () {
           <input class="input-form" type="number" id="reps-legs" name="reps-legs" min="1" />
         </div>
         <div class="input-group">
-          <label for="weight-legs">Peso (kg):</label>
-          <input class="input-form" type="number" id="weight-legs" name="weight-legs" min="0" step="0.1" />
-        </div>
-        <div class="input-group">
           <label for="tut-legs">Séries TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-legs" name="tut-legs" min="0" step="0.1" />
         </div>
+        <div class="input-group">
+          <label for="fail-legs">Quantas reps falhou:</label>
+          <input class="input-form" type="number" id="fail-legs" name="fail-legs" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="weight-legs">Peso (kg):</label>
+          <input class="input-form" type="number" id="weight-legs" name="weight-legs" min="0" step="0.1" />
+        </div>
+
         <div class="input-group" style="margin-top: 96px">
           <label for="series-triceps">Séries de Tríceps:</label>
           <input class="input-form" type="number" id="series-triceps" name="series-triceps" min="1" />
@@ -109,12 +116,16 @@ document.addEventListener("DOMContentLoaded", function () {
           <input class="input-form" type="number" id="reps-triceps" name="reps-triceps" min="1" />
         </div>
         <div class="input-group">
-          <label for="weight-triceps">Peso (kg):</label>
-          <input class="input-form" type="number" id="weight-triceps" name="weight-triceps" min="0" step="0.1" />
-        </div>
-        <div class="input-group">
           <label for="tut-triceps">Séries de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-triceps" name="tut-triceps" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="fail-triceps">Quantas reps falhou:</label>
+          <input class="input-form" type="number" id="fail-triceps" name="tfail-triceps" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="weight-triceps">Peso (kg):</label>
+          <input class="input-form" type="number" id="weight-triceps" name="weight-triceps" min="0" step="0.1" />
         </div>
       `;
     } else if (day === "2") {

@@ -231,26 +231,35 @@ function submitForm(event) {
   let selectedOption = document.querySelector(".selected-option");
 
   if (selectedOption.innerHTML === "Dia 1") {
+    
     dayNumber = getDayNumberFromId("day1");
     let seriesChest = getElementVal("series-chest");
     let repsChest = getElementVal("reps-chest");
     let tutChest = getElementVal("tut-chest");
     let failTimesOnChest = getElementVal("fail-chest");
-    let weightChest = getElementVal("weight-chest");
+    let wightForPushup = getElementVal("weight-for-pushup");
+    let equivalentWeightOnPushup = wightForPushup * 0.70;
+    
     let seriesLeg = getElementVal("series-legs");
     let repsLeg = getElementVal("reps-legs");
-    let weightLeg = getElementVal("weight-legs");
     let tutLegs = getElementVal("tut-legs");
+    let failTimesOnLegs = getElementVal("fail-legs");
+    let weightLeg = getElementVal("weight-legs");
+
     let seriesTriceps = getElementVal("series-triceps");
     let repsTriceps = getElementVal("reps-triceps");
-    let weightTriceps = getElementVal("weight-triceps");
     let tutTriceps = getElementVal("tut-triceps");
+    let failTimesOnTriceps = getElementVal("fail-triceps");
+    let weightTriceps = getElementVal("weight-triceps");
+  
+    let tricepsOverload = tutTriceps * (weightTriceps * 0.20);
+    let legsOverload = tutLegs * (weightLeg * 0.20);
+   
+    let chestOverload = tutChest * (equivalentWeightOnPushup * 0.20);
 
-    let tricepsOverload = tutTriceps * 2;
-    let legsOverload = tutLegs * 2;
-    let equivalentWeightChest = weightChest * 0.70;
-    let discountOnFail = equivalentWeightChest / 2 
-    let chestOverload = tutChest * (equivalentWeightChest * 0.35);
+    const discontOnFail = (exerciseWeight, failTimes) => {
+      return failTimes * (exerciseWeight / 2);
+    }
 
     saveMessages({
       seriesChest,
@@ -266,9 +275,9 @@ function submitForm(event) {
       weightTriceps: Number(weightTriceps),
       tutTriceps: Number(tutTriceps),
       totalLoadTriceps:
-        (seriesTriceps * repsTriceps * weightTriceps + tricepsOverload).toFixed(3),
-      totalLoadChest: (seriesChest * repsChest * equivalentWeightChest + chestOverload - (discountOnFail * failTimesOnChest)).toFixed(3),
-      totalLoadLegs: (seriesLeg * repsLeg * weightLeg + legsOverload).toFixed(3),
+        (seriesTriceps * repsTriceps * weightTriceps + tricepsOverload - discontOnFail(weightTriceps, failTimesOnTriceps) ).toFixed(3),
+      totalLoadChest: (seriesChest * repsChest * equivalentWeightOnPushup + chestOverload - discontOnFail(equivalentWeightOnPushup, failTimesOnChest)).toFixed(3),
+      totalLoadLegs: (seriesLeg * repsLeg * weightLeg + legsOverload - discontOnFail(weightLeg, failTimesOnLegs)).toFixed(3),
       seriesShoulders: null,
       repsShoulders: null,
       weightShoulders: null,
