@@ -139,13 +139,19 @@ document.addEventListener("DOMContentLoaded", function () {
           <input class="input-form" type="number" id="reps-shoulders" name="reps-shoulders" min="1" />
         </div>
         <div class="input-group">
-          <label for="weight-shoulders">Peso (kg):</label>
-          <input class="input-form" type="number" id="weight-shoulders" name="weight-shoulders" min="0" step="0.1" />
-        </div>
-        <div class="input-group">
           <label for="tut-shoulders">Séries de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-shoulders" name="tut-shoulders" min="0" step="0.1" />
         </div>
+        <div class="input-group">
+          <label for="fail-shoulders">Quantas reps falhou:</label>
+          <input class="input-form" type="number" id="fail-shoulders" name="fail-shoulders" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="weight-shoulders">Peso (kg):</label>
+          <input class="input-form" type="number" id="weight-shoulders" name="weight-shoulders" min="0" step="0.1" />
+        </div>
+
+
          <div class="input-group" style="margin-top: 96px">
           <label for="series-biceps">Séries de Bíceps:</label>
           <input class="input-form" type="number" id="series-biceps" name="series-biceps" min="1" />
@@ -155,12 +161,16 @@ document.addEventListener("DOMContentLoaded", function () {
         <input class="input-form" type="number" id="reps-biceps" name="reps-biceps" min="1" />
         </div>
         <div class="input-group">
-          <label for="weight-biceps">Peso (kg):</label>
-          <input class="input-form" type="number" id="weight-biceps" name="weight-biceps" min="0" step="0.1" />
-        </div>
-        <div class="input-group">
           <label for="tut-biceps">Séries de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-biceps" name="tut-biceps" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="fail-biceps">Quantas reps falhou:</label>
+          <input class="input-form" type="number" id="fail-biceps" name="fail-biceps" min="0" step="0.1" />
+        </div>
+        <div class="input-group">
+          <label for="weight-biceps">Peso (kg):</label>
+          <input class="input-form" type="number" id="weight-biceps" name="weight-biceps" min="0" step="0.1" />
         </div>
       `;
     } else if (day === "3") {
@@ -171,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
         <div class="input-group">
           <label for="run-distance">Distância (km):</label>
-          <input class="input-form" type="number" id="run-distance" name="run-distance" min="0" step="0.1" />
+          <input class="input-form" type="number" id="run-distance" name="run-distance" min="0" step="0.01" />
         </div>
       `;
     }

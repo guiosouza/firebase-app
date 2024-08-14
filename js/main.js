@@ -225,21 +225,24 @@ function elementExists(id) {
 }
 
 function submitForm(event) {
+  const discontOnFail = (exerciseWeight, failTimes) => {
+    return failTimes * (exerciseWeight / 2);
+  };
+
   event.preventDefault();
 
   let dayNumber;
   let selectedOption = document.querySelector(".selected-option");
 
   if (selectedOption.innerHTML === "Dia 1") {
-    
     dayNumber = getDayNumberFromId("day1");
     let seriesChest = getElementVal("series-chest");
     let repsChest = getElementVal("reps-chest");
     let tutChest = getElementVal("tut-chest");
     let failTimesOnChest = getElementVal("fail-chest");
     let wightForPushup = getElementVal("weight-for-pushup");
-    let equivalentWeightOnPushup = wightForPushup * 0.70;
-    
+    let equivalentWeightOnPushup = wightForPushup * 0.7;
+
     let seriesLeg = getElementVal("series-legs");
     let repsLeg = getElementVal("reps-legs");
     let tutLegs = getElementVal("tut-legs");
@@ -251,15 +254,11 @@ function submitForm(event) {
     let tutTriceps = getElementVal("tut-triceps");
     let failTimesOnTriceps = getElementVal("fail-triceps");
     let weightTriceps = getElementVal("weight-triceps");
-  
-    let tricepsOverload = tutTriceps * (weightTriceps * 0.20);
-    let legsOverload = tutLegs * (weightLeg * 0.20);
-   
-    let chestOverload = tutChest * (equivalentWeightOnPushup * 0.20);
 
-    const discontOnFail = (exerciseWeight, failTimes) => {
-      return failTimes * (exerciseWeight / 2);
-    }
+    let tricepsOverload = tutTriceps * (weightTriceps * 0.2);
+    let legsOverload = tutLegs * (weightLeg * 0.2);
+
+    let chestOverload = tutChest * (equivalentWeightOnPushup * 0.2);
 
     saveMessages({
       seriesChest,
@@ -274,10 +273,21 @@ function submitForm(event) {
       repsTriceps: Number(repsTriceps),
       weightTriceps: Number(weightTriceps),
       tutTriceps: Number(tutTriceps),
-      totalLoadTriceps:
-        (seriesTriceps * repsTriceps * weightTriceps + tricepsOverload - discontOnFail(weightTriceps, failTimesOnTriceps) ).toFixed(3),
-      totalLoadChest: (seriesChest * repsChest * equivalentWeightOnPushup + chestOverload - discontOnFail(equivalentWeightOnPushup, failTimesOnChest)).toFixed(3),
-      totalLoadLegs: (seriesLeg * repsLeg * weightLeg + legsOverload - discontOnFail(weightLeg, failTimesOnLegs)).toFixed(3),
+      totalLoadTriceps: (
+        seriesTriceps * repsTriceps * weightTriceps +
+        tricepsOverload -
+        discontOnFail(weightTriceps, failTimesOnTriceps)
+      ).toFixed(3),
+      totalLoadChest: (
+        seriesChest * repsChest * equivalentWeightOnPushup +
+        chestOverload -
+        discontOnFail(equivalentWeightOnPushup, failTimesOnChest)
+      ).toFixed(3),
+      totalLoadLegs: (
+        seriesLeg * repsLeg * weightLeg +
+        legsOverload -
+        discontOnFail(weightLeg, failTimesOnLegs)
+      ).toFixed(3),
       seriesShoulders: null,
       repsShoulders: null,
       weightShoulders: null,
@@ -292,17 +302,21 @@ function submitForm(event) {
     });
   } else if (selectedOption.innerHTML === "Dia 2") {
     dayNumber = getDayNumberFromId("day2");
+
     let seriesShoulders = getElementVal("series-shoulders");
     let repsShoulders = getElementVal("reps-shoulders");
-    let weightShoulders = getElementVal("weight-shoulders");
     let tutShoulders = getElementVal("tut-shoulders");
+    let failTimesOnShoulders = getElementVal("fail-shoulders");
+    let weightShoulders = getElementVal("weight-shoulders");
+
     let seriesBiceps = getElementVal("series-biceps");
     let repsBiceps = getElementVal("reps-biceps");
-    let weightBiceps = getElementVal("weight-biceps");
     let tutBiceps = getElementVal("tut-biceps");
+    let failTimesOnBiceps = getElementVal("fail-biceps");
+    let weightBiceps = getElementVal("weight-biceps");
 
-    let shouldersOverload = tutShoulders * 2;
-    let bicepsOverload = tutBiceps * 2;
+    let shouldersOverload = tutShoulders * (weightShoulders * 0.2);
+    let bicepsOverload = tutBiceps * (weightBiceps * 0.2);
 
     saveMessages({
       seriesChest: null,
@@ -325,10 +339,14 @@ function submitForm(event) {
       repsBiceps: Number(repsBiceps),
       weightBiceps: Number(weightBiceps),
       tutBiceps: Number(tutBiceps),
-      totalLoadBiceps:
-        seriesBiceps * repsBiceps * weightBiceps + bicepsOverload,
       totalLoadShoulders:
-        seriesShoulders * repsShoulders * weightShoulders + shouldersOverload,
+        seriesShoulders * repsShoulders * weightShoulders +
+        shouldersOverload -
+        discontOnFail(weightShoulders, failTimesOnShoulders),
+      totalLoadBiceps:
+        seriesBiceps * repsBiceps * weightBiceps +
+        bicepsOverload -
+        discontOnFail(weightBiceps, failTimesOnBiceps),
       runTime: null,
       runDistance: null,
       timestamp: Date.now(),
