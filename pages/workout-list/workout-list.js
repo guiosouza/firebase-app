@@ -1,3 +1,4 @@
+// workout-list.js
 import {
   getAuth,
   onAuthStateChanged,
@@ -8,6 +9,8 @@ import {
   get,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+
+const ITEMS_PER_PAGE = 15; // Alterado para carregar 3 itens por vez
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -25,6 +28,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
+let allExercises = []; // Armazena todos os exercícios carregados
+let currentIndex = 0; // Índice do próximo exercício a ser renderizado
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     loadExercises(user.uid);
@@ -34,15 +40,31 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function loadExercises(uid) {
+  const cachedExercises = JSON.parse(localStorage.getItem("exercises")) || [];
+
+  if (cachedExercises.length > 0) {
+    renderCards(cachedExercises);
+    currentIndex = cachedExercises.length;
+  } else {
+    document.getElementById("loading-message").style.display = "block";
+  }
+
   const userRef = ref(database, `users/${uid}/exerciseForm`);
   get(userRef)
     .then((snapshot) => {
       if (snapshot.exists()) {
         const data = snapshot.val();
         const exercises = Object.keys(data).map((id) => ({ id, ...data[id] }));
-
         exercises.sort((a, b) => b.timestamp - a.timestamp);
-        renderCards(exercises);
+
+        allExercises = exercises;
+        const newExercises = exercises.slice(0, ITEMS_PER_PAGE);
+
+        if (newExercises.length > 0 && JSON.stringify(newExercises) !== JSON.stringify(cachedExercises)) {
+          localStorage.setItem("exercises", JSON.stringify(newExercises));
+          renderCards(newExercises);
+          currentIndex = ITEMS_PER_PAGE;
+        }
       } else {
         showNoDataMessage();
       }
@@ -53,11 +75,26 @@ function loadExercises(uid) {
     .finally(() => {
       document.getElementById("loading-message").style.display = "none";
     });
+
+  window.addEventListener("scroll", handleScroll);
+}
+
+function handleScroll() {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  if (scrollTop + clientHeight >= scrollHeight - 5 && currentIndex < allExercises.length) {
+    loadMoreExercises();
+  }
+}
+
+function loadMoreExercises() {
+  const nextExercises = allExercises.slice(currentIndex, currentIndex + 10);
+  renderCards(nextExercises);
+  currentIndex += 10;
 }
 
 function renderCards(exercises) {
   const carousel = document.getElementById("carousel");
-  carousel.innerHTML = "";
 
   exercises.forEach((exercise) => {
     const card = document.createElement("div");
