@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <input class="input-form" type="number" id="reps-shoulders" name="reps-shoulders" min="1" />
         </div>
         <div class="input-group">
-          <label for="tut-shoulders">Séries de TUT Excêntrica (4 segundos):</label>
+          <label for="tut-shoulders">Reps de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-shoulders" name="tut-shoulders" min="0" step="0.1" />
         </div>
         <div class="input-group">
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <input class="input-form" type="number" id="reps-biceps" name="reps-biceps" min="1" />
         </div>
         <div class="input-group">
-          <label for="tut-biceps">Séries de TUT Excêntrica (4 segundos):</label>
+          <label for="tut-biceps">Reps de TUT Excêntrica (4 segundos):</label>
           <input class="input-form" type="number" id="tut-biceps" name="tut-biceps" min="0" step="0.1" />
         </div>
         <div class="input-group">
