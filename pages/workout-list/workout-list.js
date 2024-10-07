@@ -60,7 +60,10 @@ function loadExercises(uid) {
         allExercises = exercises;
         const newExercises = exercises.slice(0, ITEMS_PER_PAGE);
 
-        if (newExercises.length > 0 && JSON.stringify(newExercises) !== JSON.stringify(cachedExercises)) {
+        if (
+          newExercises.length > 0 &&
+          JSON.stringify(newExercises) !== JSON.stringify(cachedExercises)
+        ) {
           localStorage.setItem("exercises", JSON.stringify(newExercises));
           renderCards(newExercises);
           currentIndex = ITEMS_PER_PAGE;
@@ -82,7 +85,10 @@ function loadExercises(uid) {
 function handleScroll() {
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  if (scrollTop + clientHeight >= scrollHeight - 5 && currentIndex < allExercises.length) {
+  if (
+    scrollTop + clientHeight >= scrollHeight - 5 &&
+    currentIndex < allExercises.length
+  ) {
     loadMoreExercises();
   }
 }
@@ -160,8 +166,8 @@ function groupByCategory(exercise) {
     seriesBiceps: "Séries de bíceps",
     repsBiceps: "Repetições de bíceps",
     weightBiceps: "Peso bíceps (KG)",
-    totalLoadChest: "Total carga no peito",
-    totalLoadBiceps: "Total carga nos bíceps",
+    totalLoadChest: "Total de carga no peito",
+    totalLoadBiceps: "Total de carga nos bíceps",
     totalLoadTriceps: "Total de carga nos tríceps",
     totalLoadShoulders: "Total de carga nos ombros",
     tutTriceps: "Total de reps com TUTs usando tríceps",
@@ -177,6 +183,15 @@ function groupByCategory(exercise) {
       let p = document.createElement("p");
       p.classList.add("exercise-detail");
       p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
+
+      // Adiciona destaque para "Total de carga"
+      if (fieldMap[key] && fieldMap[key].includes("Total de carga")) {
+        // Envolve o número em uma span para destaque
+        const highlightedText = `${fieldMap[key]}: <span class="highlight">${exercise[key]}</span>`;
+        p.innerHTML = highlightedText;
+      } else {
+        p.textContent = `${fieldMap[key] || key}: ${exercise[key]}`;
+      }
 
       if (key.includes("Chest")) {
         categories.Peito.push(p);

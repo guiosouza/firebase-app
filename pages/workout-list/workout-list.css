@@ -62,3 +62,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.highlight {
+  background-color: yellow; /* ou qualquer cor de destaque */
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
